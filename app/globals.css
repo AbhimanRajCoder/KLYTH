@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+:root {
+  /* Klyth Design System Colors */
+  --klyth-charcoal: #121212;
+  --klyth-obsidian: #1C1C1E;
+  --klyth-cream: #F5F2EB;
+  --klyth-ghost: #2C2C2E;
+  --klyth-olive: #4A5D23;
+  --klyth-gold: #E2B842;
+  --klyth-platinum: #E5E4E2;
+  --klyth-oxblood: #8E3533;
+
+  /* Typography variables loaded from Next Font */
+  --klyth-font-serif: var(--font-playfair);
+  --klyth-font-sans: var(--font-inter);
+}
+
+@theme {
+  --color-klyth-charcoal: var(--klyth-charcoal);
+  --color-klyth-obsidian: var(--klyth-obsidian);
+  --color-klyth-cream: var(--klyth-cream);
+  --color-klyth-ghost: var(--klyth-ghost);
+  --color-klyth-olive: var(--klyth-olive);
+  --color-klyth-gold: var(--klyth-gold);
+  --color-klyth-platinum: var(--klyth-platinum);
+  --color-klyth-oxblood: var(--klyth-oxblood);
+
+  --font-serif: var(--klyth-font-serif);
+  --font-sans: var(--klyth-font-sans);
+}
+
+/* Base resets & setups */
+body {
+  font-family: var(--klyth-font-sans);
+  color: var(--klyth-cream);
+  background-color: var(--klyth-charcoal);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--klyth-font-serif);
+  line-height: 1.2;
+}
+
+/* Glassmorphism Standard */
+.klyth-glass {
+  background: rgba(28, 28, 30, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--klyth-ghost);
+}
+
+/* Navbar Link Underline Hover Effect */
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--klyth-gold);
+  transform-origin: bottom center;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.nav-link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Footer Link Hover Nudge */
+.footer-link {
+  color: rgba(245, 242, 235, 0.7);
+  transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.25s ease;
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color: var(--klyth-cream);
+  transform: translateX(3px);
+}
+
+/* Social Icon Hover Glow States */
+.social-icon-instagram {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color: rgba(245, 242, 235, 0.7);
+}
+.social-icon-instagram:hover {
+  color: #E1306C;
+  text-shadow: 0 0 15px rgba(225, 48, 108, 0.6);
+  transform: translateY(-2px);
+}
+
+.social-icon-x {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color: rgba(245, 242, 235, 0.7);
+}
+.social-icon-x:hover {
+  color: #FFFFFF;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.social-icon-linkedin {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color: rgba(245, 242, 235, 0.7);
+}
+.social-icon-linkedin:hover {
+  color: #0077B5;
+  text-shadow: 0 0 15px rgba(0, 119, 181, 0.6);
+  transform: translateY(-2px);
+}
+
+.social-icon-email {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color: rgba(245, 242, 235, 0.7);
+}
+.social-icon-email:hover {
+  color: var(--klyth-gold);
+  text-shadow: 0 0 15px rgba(226, 184, 66, 0.6);
+  transform: translateY(-2px);
+}
+
+/* CTA Breathing Animation */
+@keyframes cta-breathing {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-breathing {
+  animation: cta-breathing 2s ease-in-out infinite;
+}
