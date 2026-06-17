@@ -46,10 +46,11 @@ export default function EcosystemPillar5() {
               {/* Timeline bar */}
               <div className="relative h-80">
                 <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-color-klyth-ghost/50" />
-                <motion.div
-                  className="absolute left-1/2 -translate-x-1/2 top-0 w-1 bg-color-klyth-gold"
-                  style={{ height: timelineProgress, transition: { duration: 0.1 } }}
-                />
+                    <motion.div
+  className="absolute left-1/2 -translate-x-1/2 top-0 w-1 bg-color-klyth-gold"
+  style={{ height: timelineProgress }}
+  transition={{ duration: 0.1 }}
+/>
 
                 {/* Timeline steps */}
                 <div className="relative h-full flex flex-col justify-between">

@@ -15,29 +15,28 @@ export default function EcosystemPillar7() {
             <div className="relative w-full max-w-xs h-80">
               {cards.map((card, idx) => (
                 <motion.div
-                  key={idx}
-                  className="absolute w-full klyth-glass rounded-[24px] border border-color-klyth-ghost p-5"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ delay: idx * 0.15 }}
-                  animate={{
-                    y: [idx * -10, idx * -10 - 10, idx * -10],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: idx * 0.5,
-                  }}
-                  whileHover={{
-                    y: idx * -10 - 15,
-                  }}
-                  style={{
-                    top: `${idx * 20}px`,
-                    zIndex: cards.length - idx,
-                  }}
-                >
+  key={idx}
+  className="absolute w-full klyth-glass rounded-[24px] border border-color-klyth-ghost p-5"
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  animate={{
+    y: [idx * -10, idx * -10 - 10, idx * -10],
+  }}
+  transition={{
+    duration: 3,
+    repeat: Infinity,
+    ease: "easeInOut",
+    delay: idx * 0.5,
+  }}
+  whileHover={{
+    y: idx * -10 - 15,
+  }}
+  style={{
+    top: `${idx * 20}px`,
+    zIndex: cards.length - idx,
+  }}
+>
                   <div className="w-16 h-16 bg-color-klyth-ghost/30 rounded-xl mb-4 flex items-center justify-center">
                     <i className="fa-solid fa-newspaper text-2xl text-color-klyth-cream/50" />
                   </div>

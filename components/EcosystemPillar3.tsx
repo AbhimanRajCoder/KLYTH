@@ -34,11 +34,13 @@ export default function EcosystemPillar3() {
                   className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border border-color-klyth-gold/40"
                 />
                 <motion.div
-                  style={{ scale: rippleScale, transition: { delay: 0.2 } }}
+                  style={{ scale: rippleScale }}
+                  transition={{ delay: 0.2 }}
                   className="absolute w-48 h-48 sm:w-56 sm:h-56 rounded-full border border-color-klyth-gold/30"
                 />
                 <motion.div
-                  style={{ scale: rippleScale, transition: { delay: 0.4 } }}
+                  style={{ scale: rippleScale }}
+                  transition={{ delay: 0.4 }}
                   className="absolute w-64 h-64 sm:w-72 sm:h-72 rounded-full border border-color-klyth-gold/20"
                 />
                 {/* Center icon */}
