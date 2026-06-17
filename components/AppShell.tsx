@@ -12,9 +12,8 @@ interface AppShellProps {
 export default function AppShell({ children }: AppShellProps) {
   const pathname = usePathname() || "";
   const isJoinPage = pathname === "/join";
-  const isComingSoonPage = pathname === "/";
 
-  if (isJoinPage || isComingSoonPage) {
+  if (isJoinPage) {
     return <main className="flex-1 flex flex-col">{children}</main>;
   }
 

@@ -215,7 +215,7 @@ export default function SolutionBento() {
   ];
 
   return (
-    <section className="relative w-full bg-color-klyth-charcoal text-color-klyth-cream py-24 sm:py-32 px-6 sm:px-12 select-none border-t border-color-klyth-ghost/30">
+    <section className="relative w-full bg-color-klyth-charcoal text-color-klyth-cream py-24 sm:py-32 px-6 sm:px-12 select-none">
       {/* Background radial highlight */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute bottom-[10%] left-[-5%] w-[45vw] h-[45vw] rounded-full bg-color-klyth-olive/5 blur-[130px]" />

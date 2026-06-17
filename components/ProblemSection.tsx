@@ -127,7 +127,7 @@ export default function ProblemSection() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full bg-color-klyth-charcoal text-color-klyth-cream py-24 sm:py-32 px-6 sm:px-12 select-none border-t border-color-klyth-ghost/30"
+      className="relative w-full bg-color-klyth-charcoal text-color-klyth-cream py-24 sm:py-32 px-6 sm:px-12 select-none"
     >
       {/* Dynamic background lighting */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">

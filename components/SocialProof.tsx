@@ -64,7 +64,7 @@ export default function SocialProof() {
   const marqueeDouble = [marqueeString, marqueeString, marqueeString, marqueeString];
 
   return (
-    <section className="relative w-full bg-color-klyth-charcoal text-color-klyth-cream py-24 sm:py-32 overflow-hidden select-none border-t border-color-klyth-ghost/30">
+    <section className="relative w-full bg-color-klyth-charcoal text-color-klyth-cream py-24 sm:py-32 overflow-hidden select-none">
       
       {/* Decorative background glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">

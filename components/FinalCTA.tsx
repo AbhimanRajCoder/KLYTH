@@ -85,7 +85,7 @@ export default function FinalCTA() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full bg-color-klyth-charcoal py-24 sm:py-32 px-6 sm:px-12 select-none border-t border-color-klyth-ghost/30 overflow-hidden"
+      className="relative w-full bg-color-klyth-charcoal py-24 sm:py-32 px-6 sm:px-12 select-none overflow-hidden"
     >
       {/* Decorative background glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">

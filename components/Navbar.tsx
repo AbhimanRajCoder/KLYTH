@@ -45,17 +45,17 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
           isScrolled
-            ? "klyth-glass py-4 shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
-            : "bg-transparent py-6"
+            ? "klyth-glass py-4 border-color-klyth-gold/30 shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
+            : "bg-transparent py-6 border-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
           {/* Left: Brand Logo & Name */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <Image
-              src="/img/Logo_Full.png"
+              src="/img/Logo.png"
               alt="Klyth Logo"
               width={140}
               height={40}
@@ -123,7 +123,7 @@ export default function Navbar() {
                 className="flex items-center gap-2.5"
               >
                 <Image
-                  src="/img/Logo_Full.png"
+                  src="/img/Logo.png"
                   alt="Klyth Logo"
                   width={140}
                   height={40}

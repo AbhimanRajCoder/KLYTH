@@ -45,7 +45,7 @@ export default function Footer() {
           <div className="lg:col-span-2 flex flex-col items-start gap-6">
             <Link href="/" className="flex items-center gap-2.5 group">
               <Image
-                src="/img/Logo_Full.png"
+                src="/img/Logo.png"
                 alt="Klyth Logo"
                 width={140}
                 height={40}
