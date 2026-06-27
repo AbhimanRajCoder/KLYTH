@@ -11,7 +11,7 @@ interface StatCounterProps {
 const StatCounter = ({ value, suffix }: StatCounterProps) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   useEffect(() => {
     if (!inView) return;
@@ -19,15 +19,15 @@ const StatCounter = ({ value, suffix }: StatCounterProps) => {
     const end = value;
     if (start === end) return;
 
-    const duration = 2000; // 2 seconds animation
+    const duration = 2500; // 2.5 seconds animation for luxurious feel
     const startTime = performance.now();
 
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       
-      // Ease out quad formula for premium deceleration
-      const easeProgress = progress * (2 - progress);
+      // Premium Ease Out Expo formula for elegant deceleration
+      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
       const currentValue = Math.floor(easeProgress * (end - start) + start);
       
       setCount(currentValue);
@@ -45,30 +45,31 @@ const StatCounter = ({ value, suffix }: StatCounterProps) => {
   };
 
   return (
-    <span ref={ref} className="font-sans font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-color-klyth-cream select-text">
+    <span ref={ref} className="font-serif font-bold text-6xl sm:text-7xl lg:text-8xl tracking-tight text-color-klyth-cream select-text leading-none">
       {formatNumber(count)}
-      {suffix}
+      <span className="text-color-klyth-gold font-sans ml-1 text-4xl sm:text-5xl lg:text-6xl align-top">{suffix}</span>
     </span>
   );
 };
 
 export default function SocialProof() {
+  const [isMarqueeHovered, setIsMarqueeHovered] = useState(false);
   const marqueeItems = [
     "Stop Surviving. Start Scaling.",
     "The Money Taboo is Broken.",
     "Financial Growth, Rewired."
   ];
   
-  // Combine items with spacer symbol and duplicate for infinite seamless loop
-  const marqueeString = marqueeItems.join("  •  ") + "  •  ";
+  // Combine items with spacer star and duplicate for seamless looping
+  const marqueeString = marqueeItems.join("   ✦   ") + "   ✦   ";
   const marqueeDouble = [marqueeString, marqueeString, marqueeString, marqueeString];
 
   return (
-    <section className="relative w-full bg-color-klyth-charcoal text-color-klyth-cream py-24 sm:py-32 overflow-hidden select-none">
+    <section className="relative w-full bg-transparent text-color-klyth-cream py-24 sm:py-32 overflow-hidden select-none">
       
       {/* Decorative background glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[20vw] rounded-full bg-color-klyth-olive/5 blur-[150px]" />
+        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[20vw] rounded-full bg-color-klyth-olive/4 blur-[150px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 flex flex-col gap-20 sm:gap-24">
@@ -82,29 +83,37 @@ export default function SocialProof() {
           </h2>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-12 w-full text-center">
+        {/* Stats Grid (Editorial Layout) */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-16 md:gap-0 w-full relative z-10">
           
           {/* Stat 1 */}
-          <div className="flex flex-col gap-4 p-8 klyth-glass rounded-[28px] border border-color-klyth-ghost/40 hover:border-color-klyth-olive/30 transition-colors duration-500">
+          <div className="flex-1 flex flex-col items-center justify-center gap-5 text-center md:px-6">
             <StatCounter value={12500} suffix="+" />
-            <span className="font-sans font-medium text-sm sm:text-base text-color-klyth-cream/70 uppercase tracking-widest">
+            <span className="font-sans font-semibold text-xs sm:text-sm text-color-klyth-cream/60 uppercase tracking-[0.22em] max-w-[220px] leading-relaxed">
               Waitlisted for the Ecosystem
             </span>
           </div>
 
+          {/* Divider (Mobile vs Desktop) */}
+          <div className="block md:hidden w-1/4 h-[1px] bg-gradient-to-r from-transparent via-color-klyth-ghost/40 to-transparent mx-auto" />
+          <div className="hidden md:block w-[1px] h-28 bg-gradient-to-b from-transparent via-color-klyth-ghost/40 to-transparent" />
+
           {/* Stat 2 */}
-          <div className="flex flex-col gap-4 p-8 klyth-glass rounded-[28px] border border-color-klyth-ghost/40 hover:border-color-klyth-olive/30 transition-colors duration-500">
+          <div className="flex-1 flex flex-col items-center justify-center gap-5 text-center md:px-6">
             <StatCounter value={500} suffix="+" />
-            <span className="font-sans font-medium text-sm sm:text-base text-color-klyth-cream/70 uppercase tracking-widest">
+            <span className="font-sans font-semibold text-xs sm:text-sm text-color-klyth-cream/60 uppercase tracking-[0.22em] max-w-[220px] leading-relaxed">
               Hours of Live Expert Mentorship Delivered
             </span>
           </div>
 
+          {/* Divider (Mobile vs Desktop) */}
+          <div className="block md:hidden w-1/4 h-[1px] bg-gradient-to-r from-transparent via-color-klyth-ghost/40 to-transparent mx-auto" />
+          <div className="hidden md:block w-[1px] h-28 bg-gradient-to-b from-transparent via-color-klyth-ghost/40 to-transparent" />
+
           {/* Stat 3 */}
-          <div className="flex flex-col gap-4 p-8 klyth-glass rounded-[28px] border border-color-klyth-ghost/40 hover:border-color-klyth-olive/30 transition-colors duration-500">
+          <div className="flex-1 flex flex-col items-center justify-center gap-5 text-center md:px-6">
             <StatCounter value={100} suffix="%" />
-            <span className="font-sans font-medium text-sm sm:text-base text-color-klyth-cream/70 uppercase tracking-widest">
+            <span className="font-sans font-semibold text-xs sm:text-sm text-color-klyth-cream/60 uppercase tracking-[0.22em] max-w-[220px] leading-relaxed">
               Focus on Personalized Execution (Zero BS)
             </span>
           </div>
@@ -113,18 +122,27 @@ export default function SocialProof() {
       </div>
 
       {/* Infinite Looping Marquee */}
-      <div className="relative mt-24 py-6 border-y border-color-klyth-ghost/20 bg-color-klyth-charcoal/50 w-full overflow-hidden flex z-10 pointer-events-none">
+      <div
+        onMouseEnter={() => setIsMarqueeHovered(true)}
+        onMouseLeave={() => setIsMarqueeHovered(false)}
+        className="relative mt-24 py-6 border-y border-color-klyth-ghost/15 bg-color-klyth-charcoal/30 w-full overflow-hidden flex z-10 pointer-events-auto cursor-default group"
+      >
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
           transition={{
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 35,
+              duration: isMarqueeHovered ? 160 : 40,
               ease: "linear"
             }
           }}
-          className="flex whitespace-nowrap gap-8 text-color-klyth-cream/15 text-2xl sm:text-3xl lg:text-4xl font-sans font-bold uppercase tracking-widest leading-none select-none min-w-max"
+          style={{ willChange: "transform" }}
+          className={`flex whitespace-nowrap gap-8 font-serif italic tracking-wider leading-none select-none min-w-max transition-all duration-700 ${
+            isMarqueeHovered
+              ? "text-color-klyth-gold/45 drop-shadow-[0_0_15px_rgba(226,184,66,0.25)] text-3xl sm:text-4xl lg:text-5xl"
+              : "text-color-klyth-cream/8 text-2xl sm:text-3xl lg:text-4xl"
+          }`}
         >
           {marqueeDouble.map((text, idx) => (
             <span key={idx} className="mr-8">

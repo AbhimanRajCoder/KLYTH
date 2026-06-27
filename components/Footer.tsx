@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   const pathname = usePathname() || "";
@@ -17,7 +18,7 @@ export default function Footer() {
     pathname === "/contact";
 
   return (
-    <footer className="w-full bg-[#000000] border-t border-klyth-ghost text-klyth-cream font-sans transition-colors duration-300">
+    <footer className="relative w-full bg-[#000000] border-t border-klyth-ghost text-klyth-cream font-sans transition-colors duration-300 overflow-hidden">
       {/* 8.1 Top Hook Section */}
       {!hideTopHook && (
         <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-20 flex flex-col md:flex-row items-center justify-between gap-8 border-b border-klyth-ghost">
@@ -39,7 +40,7 @@ export default function Footer() {
       )}
 
       {/* 8.2 Main Grid */}
-      <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
           {/* Column 1 — Brand (Takes wider span on desktop) */}
           <div className="lg:col-span-2 flex flex-col items-start gap-6">
@@ -174,8 +175,43 @@ export default function Footer() {
           </div>
         </div>
 
+      {/* Large KLYTH Watermark with Fill Effect */}
+      <div className="w-full flex justify-center pointer-events-none select-none pt-8 md:pt-16 pb-4 relative">
+        {/* Always Visible Outline */}
+        <span 
+          className="font-serif font-bold text-[16vw] leading-none tracking-tighter"
+          style={{
+            WebkitTextStroke: "1px rgba(255, 255, 255, 0.15)",
+            color: "transparent",
+          }}
+        >
+          KLYTH
+        </span>
+
+        {/* Gold Fill Sweep */}
+        <motion.span 
+          className="font-serif font-bold text-[16vw] leading-none tracking-tighter absolute"
+          style={{
+            backgroundImage: "linear-gradient(135deg, #EDCF72 0%, #E2B842 50%, #CFA536 100%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            WebkitTextFillColor: "transparent",
+          }}
+          animate={{ clipPath: ["inset(0 100% 0 0)", "inset(0 0% 0 0)", "inset(0 0% 0 100%)", "inset(0 100% 0 0)"] }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            times: [0, 0.4, 0.8, 1]
+          }}
+        >
+          KLYTH
+        </motion.span>
+      </div>
+
         {/* 8.3 Bottom Bar */}
-        <div className="mt-16 md:mt-20 pt-8 border-t border-klyth-ghost flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-klyth-cream/40 text-center sm:text-left">
+        <div className="relative z-10 mt-16 md:mt-20 pt-8 border-t border-klyth-ghost flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-klyth-cream/40 text-center sm:text-left">
           <div>© 2026 Klyth. All rights reserved.</div>
           <div className="flex items-center gap-1.5">
             <span>Built in Pune, India.</span>
