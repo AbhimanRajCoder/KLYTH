@@ -17,7 +17,7 @@ export default function EcosystemFinalCTA() {
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 2, ease: premiumEase }}
-        className="relative bg-[#1C1C1E]/40 backdrop-blur-3xl max-w-4xl w-full border border-white/5 rounded-[3rem] p-16 md:p-28 text-center flex flex-col items-center shadow-[0_40px_100px_rgba(0,0,0,0.8)]"
+        className="relative klyth-glass max-w-4xl w-full rounded-[3rem] p-16 md:p-28 text-center flex flex-col items-center shadow-[0_40px_100px_rgba(0,0,0,0.8)]"
       >
         <div className="w-16 h-[1px] bg-klyth-gold/50 mb-14 mx-auto"></div>
         

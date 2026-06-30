@@ -59,7 +59,7 @@ export default function EcosystemPillar1() {
               hidden: { opacity: 0, y: -20 },
               visible: { opacity: 1, y: 0, transition: { duration: 1.5, delay: 0.2, ease: premiumEase } }
             }}
-            className="w-full h-32 rounded-xl bg-[#1C1C1E]/60 backdrop-blur-xl border border-white/5 flex flex-col justify-end p-5 shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
+            className="w-full h-32 rounded-xl klyth-glass flex flex-col justify-end p-5 shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
           >
              <div className="w-1/3 h-[3px] bg-klyth-olive rounded-full mb-3"></div>
              <div className="w-2/3 h-[3px] bg-white/10 rounded-full"></div>
@@ -70,7 +70,7 @@ export default function EcosystemPillar1() {
               hidden: { opacity: 0, x: 20 },
               visible: { opacity: 1, x: 0, transition: { duration: 1.5, delay: 0.4, ease: premiumEase } }
             }}
-            className="w-full h-16 rounded-xl bg-[#1C1C1E]/60 backdrop-blur-xl border border-white/5 flex items-center p-5 shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
+            className="w-full h-16 rounded-xl klyth-glass flex items-center p-5 shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
           >
             <div className="w-6 h-6 rounded-full border border-klyth-gold/30 mr-4 flex items-center justify-center">
               <div className="w-2 h-2 rounded-full bg-klyth-gold/20"></div>
@@ -83,7 +83,7 @@ export default function EcosystemPillar1() {
               hidden: { opacity: 0, x: -20 },
               visible: { opacity: 1, x: 0, transition: { duration: 1.5, delay: 0.6, ease: premiumEase } }
             }}
-            className="w-full h-16 rounded-xl bg-[#1C1C1E]/60 backdrop-blur-xl border border-white/5 flex items-center p-5 shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
+            className="w-full h-16 rounded-xl klyth-glass flex items-center p-5 shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
           >
             <div className="w-6 h-6 rounded-full border border-klyth-platinum/30 mr-4 flex items-center justify-center">
                <div className="w-2 h-2 rounded-full bg-klyth-platinum/20"></div>

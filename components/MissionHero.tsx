@@ -1,79 +1,143 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 export default function MissionHero() {
   const headline = "The system taught us how to work for money, but not how money works.";
   const words = headline.split(" ");
 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  const bgTranslateX = useTransform(smoothX, [-0.5, 0.5], [-15, 15]);
+  const bgTranslateY = useTransform(smoothY, [-0.5, 0.5], [-15, 15]);
+  const fgTranslateX = useTransform(smoothX, [-0.5, 0.5], [8, -8]);
+  const fgTranslateY = useTransform(smoothY, [-0.5, 0.5], [8, -8]);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX / innerWidth) - 0.5;
+      const y = (e.clientY / innerHeight) - 0.5;
+      mouseX.set(x);
+      mouseY.set(y);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
   return (
-    <section className="relative w-full min-h-screen flex items-end bg-color-klyth-charcoal px-6 sm:px-12 py-24 overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 rounded-full bg-color-klyth-olive/10 blur-[120px]" />
+    <section className="relative w-full min-h-[80vh] flex items-center bg-klyth-charcoal px-6 sm:px-12 py-16 sm:py-20 overflow-hidden select-none">
+      {/* Subtle Atmospheric Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#121212_95%)] z-10" />
+        <div 
+          className="absolute inset-0 opacity-[0.02] z-[2]" 
+          style={{
+            backgroundImage: `radial-gradient(var(--klyth-cream) 1px, transparent 1px)`,
+            backgroundSize: '48px 48px'
+          }}
+        />
+
+        <motion.div 
+          style={{ x: bgTranslateX, y: bgTranslateY }}
+          className="absolute inset-0 flex items-center justify-center scale-105 z-[1]"
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.05, 0.98, 1],
+              x: [0, 20, -10, 0],
+              y: [0, -15, 20, 0],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-klyth-olive/10 blur-[120px]"
+          />
+          <motion.div
+            animate={{
+              scale: [1, 0.97, 1.03, 1],
+              x: [0, -20, 10, 0],
+              y: [0, 25, -15, 0],
+            }}
+            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-1/4 right-1/4 w-[330px] h-[330px] rounded-full bg-klyth-gold/5 blur-[110px]"
+          />
+        </motion.div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <div className="max-w-4xl">
+      <div className="relative z-20 max-w-7xl mx-auto w-full pt-6">
+        <div className="max-w-5xl">
           <motion.div
-            className="overflow-hidden"
-            initial="hidden"
-            animate="visible"
+            style={{ x: fgTranslateX, y: fgTranslateY }}
+            className="flex flex-wrap gap-x-3 gap-y-1 sm:gap-y-2"
           >
-            <div className="flex flex-wrap gap-2 sm:gap-4">
-              {words.map((word, idx) => (
-                <motion.span
-                  key={idx}
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-color-klyth-cream leading-tight"
-                  variants={{
-                    hidden: { y: "100%" },
-                    visible: {
-                      y: 0,
-                      transition: {
-                        duration: 0.7,
-                        delay: idx * 0.06,
-                        ease: [0.215, 0.61, 0.355, 1],
-                      },
-                    },
-                  }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </div>
+            {words.map((word, idx) => {
+              const isHighlight = word.toLowerCase().includes("money");
+              return (
+                <div key={idx} className="py-1 inline-block">
+                  <motion.span
+                    className={`inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-semibold tracking-tight leading-tight ${
+                      isHighlight
+                        ? "text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-klyth-cream font-bold italic"
+                        : "text-klyth-cream"
+                    }`}
+                    initial={{ y: 15, opacity: 0, filter: "blur(4px)" }}
+                    animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                    transition={{
+                      y: { duration: 0.8, delay: idx * 0.035, ease: [0.16, 1, 0.3, 1] },
+                      opacity: { duration: 0.8, delay: idx * 0.035 },
+                      filter: { duration: 0.8, delay: idx * 0.035 }
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                </div>
+              );
+            })}
           </motion.div>
 
           <motion.p
-            className="mt-8 text-lg sm:text-xl md:text-2xl text-color-klyth-cream/70 font-sans max-w-3xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.7, ease: "easeOut" }}
+            className="mt-6 text-base sm:text-lg text-klyth-cream/65 font-sans max-w-3xl leading-relaxed font-light border-l border-klyth-olive/35 pl-6"
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            We spent two decades preparing for careers, but zero hours preparing for the wealth those careers generate. It's time to rewrite the rules for a generation left to figure it out alone.
+            We spent two decades preparing for careers, but zero hours preparing for the wealth those careers generate. It&apos;s time to rewrite the rules for a generation left to figure it out alone.
           </motion.p>
         </div>
 
-        {/* Scroll indicator */}
         <motion.div
-          className="mt-16 flex flex-col items-center gap-2"
+          className="mt-10 flex flex-col items-start gap-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.7 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
         >
-          <span className="text-xs text-color-klyth-cream/40 font-sans tracking-widest uppercase">
-            Scroll to explore
-          </span>
-          <motion.div
-            className="w-px h-12 bg-color-klyth-ghost"
-            initial={{ height: 0 }}
-            animate={{ height: 48 }}
-            transition={{
-              delay: 2,
-              duration: 1.5,
-              ease: "easeOut",
-            }}
-          />
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] text-klyth-cream/35 font-sans tracking-[0.2em] uppercase font-semibold">
+              Scroll to explore
+            </span>
+            <span className="w-1 h-1 rounded-full bg-klyth-gold/70" />
+          </div>
+          
+          <div className="relative w-[1px] h-8 bg-klyth-ghost overflow-hidden">
+            <motion.div
+              className="absolute top-0 left-0 w-full bg-gradient-to-b from-klyth-gold to-klyth-olive"
+              style={{ height: "100%" }}
+              animate={{
+                y: ["-100%", "100%"],
+              }}
+              transition={{
+                duration: 2.2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </div>
         </motion.div>
       </div>
     </section>

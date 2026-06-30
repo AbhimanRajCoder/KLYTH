@@ -50,7 +50,7 @@ export default function EcosystemPillar7() {
           {[...newsItems, ...newsItems].map((item, i) => (
             <div 
               key={i} 
-              className="w-full bg-[#1C1C1E]/40 backdrop-blur-2xl p-6 rounded-2xl border border-white/5 flex flex-col hover:bg-[#1C1C1E]/60 transition-colors duration-500 cursor-default group"
+              className="w-full klyth-glass p-6 rounded-2xl flex flex-col transition-colors duration-500 cursor-default group hover:brightness-110"
             >
                <span className="font-sans text-[10px] tracking-[0.2em] text-klyth-gold/60 font-medium mb-3 uppercase transition-colors duration-500 group-hover:text-klyth-gold/90">{item.date}</span>
                <h4 className="font-serif text-xl text-klyth-cream/80 transition-colors duration-500 group-hover:text-white">{item.title}</h4>

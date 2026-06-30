@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { MOCK_EVENTS } from "@/lib/eventsService";
 
 const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -31,12 +32,11 @@ export default function EcosystemPillar2() {
     }
   };
 
-  const events = [
-    { title: "Mastering the 50/30/20 Rule", type: "Virtual Workshop", host: "Klyth Network" },
-    { title: "First Salary Playbook", type: "Exclusive AMA", host: "Guest Creator" },
-    { title: "Navigating Tech Layoffs: Financial Defense", type: "Live Q&A", host: "Wealth Strategist" },
-    { title: "Index Funds Deconstructed", type: "Masterclass", host: "Klyth Mentorship Team" }
-  ];
+  const events = MOCK_EVENTS.map(e => ({
+    title: e.title,
+    type: e.category.charAt(0).toUpperCase() + e.category.slice(1),
+    host: e.host.name
+  }));
 
   return (
     <section className="relative w-full py-48 px-0 bg-klyth-charcoal z-10 overflow-hidden">
@@ -87,7 +87,7 @@ export default function EcosystemPillar2() {
           {events.map((event, i) => (
             <motion.div
               key={i}
-              className="min-w-[300px] md:min-w-[400px] bg-[#1C1C1E]/40 backdrop-blur-2xl p-10 rounded-2xl border border-white/5 flex flex-col justify-between aspect-[4/3] transition-all duration-700 ease-out hover:scale-[1.03] hover:mx-4 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:bg-[#1C1C1E]/60 flex-shrink-0 select-none group"
+              className="min-w-[300px] md:min-w-[400px] klyth-glass p-10 rounded-2xl flex flex-col justify-between aspect-[4/3] transition-all duration-700 ease-out hover:scale-[1.03] hover:mx-4 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex-shrink-0 select-none group"
             >
               <div className="flex flex-col gap-2 mb-8">
                 <span className="font-sans text-klyth-gold/70 text-[10px] tracking-[0.2em] uppercase font-medium">

@@ -16,7 +16,7 @@ export default function EcosystemPillar4() {
   const backgroundColor = useTransform(
     scrollYProgress,
     [0.2, 0.5, 0.8],
-    ["#121212", "#0A0A0B", "#121212"]
+    ["#121212", "#1C1C1E", "#121212"]
   );
 
   return (
@@ -31,7 +31,7 @@ export default function EcosystemPillar4() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.5, ease: premiumEase }}
-          className="w-full bg-[#1C1C1E]/40 backdrop-blur-3xl rounded-[2rem] md:rounded-[3rem] p-12 md:p-24 lg:p-32 border border-white/5 text-center shadow-[0_40px_100px_rgba(0,0,0,0.8)] relative overflow-hidden"
+          className="w-full klyth-glass rounded-[2rem] md:rounded-[3rem] p-12 md:p-24 lg:p-32 text-center shadow-[0_40px_100px_rgba(0,0,0,0.8)] relative overflow-hidden"
         >
           {/* Inner subtle glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-klyth-olive/5 blur-[120px] pointer-events-none"></div>

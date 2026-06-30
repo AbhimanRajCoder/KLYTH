@@ -57,7 +57,7 @@ export default function FinalCTA() {
       {/* Fused form */}
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-xl mx-auto flex flex-col min-[400px]:flex-row items-center gap-4 min-[400px]:gap-0 min-[400px]:bg-color-klyth-charcoal/80 min-[400px]:p-2 min-[400px]:rounded-full min-[400px]:border min-[400px]:border-color-klyth-ghost/60 transition-all duration-500 focus-within:border-color-klyth-gold/40 focus-within:shadow-[0_0_35px_rgba(226,184,66,0.15)]"
+        className="flex flex-col sm:flex-row gap-4 w-full max-w-xl mx-auto mt-4"
       >
         <input
           type="email"
@@ -66,14 +66,14 @@ export default function FinalCTA() {
           placeholder="Enter your email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full min-[400px]:flex-1 bg-transparent px-6 py-4 min-[400px]:py-3 text-color-klyth-cream placeholder-color-klyth-cream/35 focus:outline-none text-base border border-color-klyth-ghost/40 min-[400px]:border-none rounded-full min-[400px]:rounded-none focus:border-color-klyth-gold/45 min-[400px]:focus:border-none transition-colors duration-300"
+          className="flex-grow bg-black/40 border border-white/5 rounded-full px-8 py-5 text-base md:text-lg text-color-klyth-cream placeholder:text-color-klyth-cream/30 focus:outline-none focus:border-color-klyth-olive focus:ring-1 focus:ring-color-klyth-olive transition-all"
         />
         <button
           type="submit"
-          className="w-full min-[400px]:w-auto bg-color-klyth-olive text-color-klyth-cream font-sans font-semibold px-8 py-4 min-[400px]:py-3.5 rounded-full border border-color-klyth-olive/40 shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_30px_rgba(74,93,35,0.35)] hover:border-color-klyth-gold/30 transition-all duration-500 transform active:scale-[0.97] animate-pulse-breathing focus:outline-none focus:ring-2 focus:ring-color-klyth-gold/50 min-h-[48px] whitespace-nowrap cursor-pointer relative overflow-hidden group"
+          className="group relative font-sans text-xs md:text-sm uppercase tracking-widest font-semibold text-color-klyth-cream bg-color-klyth-olive hover:bg-color-klyth-olive/90 border border-color-klyth-olive/40 px-10 py-5 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(74,93,35,0.6)] hover:border-color-klyth-gold/40 hover:-translate-y-1 transition-all duration-500 ease-out whitespace-nowrap overflow-hidden"
         >
-          {/* Shine glare effect on hover */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+          {/* Glare effect inside the button */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
           <span className="relative z-10">Unlock Early Access</span>
         </button>
       </form>
@@ -101,7 +101,7 @@ export default function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
-          className="klyth-glass rounded-[32px] p-8 sm:p-12 md:p-16 border border-white/5 relative z-10 max-w-5xl mx-auto shadow-[0_15px_40px_rgba(0,0,0,0.4)]"
+          className="rounded-[32px] p-8 sm:p-12 md:p-16 relative z-10 max-w-5xl mx-auto"
         >
           {content}
         </motion.div>
@@ -109,10 +109,8 @@ export default function FinalCTA() {
         <motion.div
           suppressHydrationWarning
           style={{ scale, opacity, y }}
-          className="group klyth-glass rounded-[40px] p-16 lg:p-20 border border-white/5 relative z-10 max-w-5xl mx-auto shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden"
+          className="group rounded-[40px] p-16 lg:p-20 relative z-10 max-w-5xl mx-auto overflow-hidden"
         >
-          {/* Subtle diagonal reflection sweep */}
-          <div className="absolute inset-0 rounded-[40px] p-[1px] bg-gradient-to-b from-white/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
           {content}
         </motion.div>
       )}

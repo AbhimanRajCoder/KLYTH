@@ -43,7 +43,7 @@ export default function EcosystemPillar6() {
             }}
             transition={{ duration: 25 + Math.random() * 20, repeat: Infinity, delay: b.delay, ease: "linear" }}
             whileHover={{ scale: 1.1, opacity: 0.5, borderColor: "rgba(255,255,255,0.2)" }} 
-            className="absolute w-14 h-14 rounded-full border border-white/5 bg-[#1C1C1E]/20 backdrop-blur-xl flex items-center justify-center cursor-default transition-all duration-1000 ease-out"
+            className="absolute w-14 h-14 rounded-full klyth-glass flex items-center justify-center cursor-default transition-all duration-1000 ease-out"
             style={{ left: `${b.x}%`, top: `${b.y}%` }}
           >
              <div className="w-1.5 h-1.5 rounded-full bg-klyth-cream/20"></div>
