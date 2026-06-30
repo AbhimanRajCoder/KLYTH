@@ -14,18 +14,18 @@ const ProblemItem = ({ number, title, body }: ProblemItemProps) => {
     hidden: { scaleX: 0 },
     visible: {
       scaleX: 1,
-      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] as const },
     },
-  };
+  } as const;
 
   const contentVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 },
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as const, delay: 0.1 },
     },
-  };
+  } as const;
 
   return (
     <motion.div
@@ -64,9 +64,9 @@ export default function ProblemSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1, ease: [0.16, 1, 0.3, 1], staggerChildren: 0.15 },
+      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const, staggerChildren: 0.15 },
     },
-  };
+  } as const;
 
   const cards = [
     {

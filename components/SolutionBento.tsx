@@ -18,17 +18,17 @@ const PillarItem = ({ idx, title, tag, description }: PillarItemProps) => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] as const },
     },
-  };
+  } as const;
 
   const lineVariants = {
     hidden: { scaleX: 0 },
     visible: {
       scaleX: 1,
-      transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] as const },
     },
-  };
+  } as const;
 
   const numberColorClass = isEven ? "text-klyth-olive/50" : "text-klyth-gold/45";
   const underlineColorClass = isEven ? "from-klyth-olive/30" : "from-klyth-gold/30";
