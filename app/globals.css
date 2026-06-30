@@ -54,6 +54,71 @@ body::after {
   z-index: 9999;
 }
 
+/* Global cursor pointer for all interactive elements */
+a, button, [role="button"], input[type="submit"], input[type="button"], select, label[for] {
+  cursor: pointer;
+}
+
+/* Premium Button Base */
+.klyth-btn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--klyth-font-sans);
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 14px 32px;
+  border-radius: 9999px;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.klyth-btn:hover {
+  transform: translateY(-1px);
+}
+
+.klyth-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Primary: White on dark */
+.klyth-btn-primary {
+  background: var(--klyth-cream);
+  color: var(--klyth-charcoal);
+  box-shadow: 0 0 20px rgba(245, 242, 235, 0.06);
+}
+
+.klyth-btn-primary:hover {
+  box-shadow: 0 0 40px rgba(245, 242, 235, 0.12);
+}
+
+/* Secondary: Olive */
+.klyth-btn-olive {
+  background: var(--klyth-olive);
+  color: var(--klyth-cream);
+  box-shadow: 0 0 20px rgba(74, 93, 35, 0.15);
+}
+
+.klyth-btn-olive:hover {
+  box-shadow: 0 0 40px rgba(74, 93, 35, 0.3);
+}
+
+/* Ghost: Transparent border */
+.klyth-btn-ghost {
+  background: transparent;
+  color: var(--klyth-cream);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.klyth-btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--klyth-font-serif);
   line-height: 1.15;

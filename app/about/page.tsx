@@ -2,7 +2,7 @@ import AboutHero from "@/components/AboutHero";
 import AboutOrigin from "@/components/AboutOrigin";
 import AboutTeam from "@/components/AboutTeam";
 import AboutMentorship from "@/components/AboutMentorship";
-import EcosystemFinalCTA from "@/components/EcosystemFinalCTA";
+import EcosystemFinalCTA from "@/components/ecosystem/EcosystemFinalCTA";
 
 export default function AboutPage() {
   return (

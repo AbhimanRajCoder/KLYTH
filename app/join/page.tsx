@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { Smartphone, Calendar, Newspaper, Users, Timer, Check, Loader2, ArrowRight, ArrowLeft } from "lucide-react";
 
 export default function JoinPage() {
   const [step, setStep] = useState(1);
@@ -16,27 +17,27 @@ export default function JoinPage() {
     {
       title: "Priority App Beta Access",
       desc: "First to experience the Klyth app before public launch",
-      icon: <i className="fa-solid fa-mobile-screen-button text-sm" />,
+      icon: <Smartphone className="w-4 h-4" />,
     },
     {
       title: "VIP Event Invites",
       desc: "Early-access RSVPs to closed-door workshops and AMAs",
-      icon: <i className="fa-solid fa-calendar-days text-sm" />,
+      icon: <Calendar className="w-4 h-4" />,
     },
     {
       title: "The Financial Rewiring Newsletter",
       desc: "Bite-sized, actionable financial systems weekly",
-      icon: <i className="fa-solid fa-newspaper text-sm" />,
+      icon: <Newspaper className="w-4 h-4" />,
     },
     {
       title: "Day-One Community Entry",
       desc: "Priority access to closed-door peer forums",
-      icon: <i className="fa-solid fa-user-group text-sm" />,
+      icon: <Users className="w-4 h-4" />,
     },
     {
       title: "Priority Cohort Selection",
       desc: "Skip waitlist for 30-day financial action sprints",
-      icon: <i className="fa-solid fa-stopwatch text-sm" />,
+      icon: <Timer className="w-4 h-4" />,
     },
   ];
 
@@ -200,7 +201,7 @@ export default function JoinPage() {
                               : "bg-transparent border-klyth-ghost"
                           }`}
                         >
-                          {agreed && <i className="fa-solid fa-check text-[10px] text-klyth-cream" />}
+                          {agreed && <Check className="w-3 h-3 text-klyth-cream" />}
                         </div>
                         <label className="text-[11px] text-klyth-cream/50 leading-relaxed cursor-pointer">
                           I accept early invites, rewiring newsletters, and agree to the{" "}
@@ -226,11 +227,11 @@ export default function JoinPage() {
                         }`}
                       >
                         {isLoading ? (
-                          <i className="fa-solid fa-circle-notch animate-spin" />
+                          <Loader2 className="w-4 h-4 animate-spin" />
                         ) : (
                           <>
                             Unlock Entry
-                            <i className="fa-solid fa-arrow-right-long text-xs ml-1" />
+                            <ArrowRight className="w-4 h-4 ml-1" />
                           </>
                         )}
                       </button>
@@ -254,7 +255,7 @@ export default function JoinPage() {
                         onClick={() => setStep(1)} 
                         className="inline-flex items-center gap-1.5 text-xs text-klyth-cream/40 hover:text-klyth-cream transition-colors mb-6"
                       >
-                        <i className="fa-solid fa-arrow-left text-[10px]" /> Back
+                        <ArrowLeft className="w-3 h-3" /> Back
                       </button>
                       
                       <h2 className="text-xl sm:text-2xl font-serif font-bold mb-2">Spot Reserved.</h2>
@@ -298,11 +299,11 @@ export default function JoinPage() {
                       }`}
                     >
                       {isLoading ? (
-                        <i className="fa-solid fa-circle-notch animate-spin" />
+                        <Loader2 className="w-4 h-4 animate-spin" />
                       ) : (
                         <>
                           Complete Setup
-                          <i className="fa-solid fa-check text-xs ml-1" />
+                          <Check className="w-4 h-4 ml-1" />
                         </>
                       )}
                     </button>
@@ -324,7 +325,7 @@ export default function JoinPage() {
                         animate={{ scale: [1, 1.3, 1], opacity: [0.6, 0, 0.6] }}
                         transition={{ duration: 2.5, repeat: Infinity }}
                       />
-                      <i className="fa-solid fa-check text-2xl text-klyth-gold" />
+                      <Check className="w-6 h-6 text-klyth-gold" />
                     </div>
 
                     <h2 className="text-2xl sm:text-3xl font-serif font-bold mb-3">Welcome to Klyth.</h2>

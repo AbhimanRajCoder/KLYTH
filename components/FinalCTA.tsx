@@ -68,14 +68,27 @@ export default function FinalCTA() {
           onChange={(e) => setEmail(e.target.value)}
           className="flex-grow bg-black/40 border border-white/5 rounded-full px-8 py-5 text-base md:text-lg text-color-klyth-cream placeholder:text-color-klyth-cream/30 focus:outline-none focus:border-color-klyth-olive focus:ring-1 focus:ring-color-klyth-olive transition-all"
         />
-        <button
-          type="submit"
-          className="group relative font-sans text-xs md:text-sm uppercase tracking-widest font-semibold text-color-klyth-cream bg-color-klyth-olive hover:bg-color-klyth-olive/90 border border-color-klyth-olive/40 px-10 py-5 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(74,93,35,0.6)] hover:border-color-klyth-gold/40 hover:-translate-y-1 transition-all duration-500 ease-out whitespace-nowrap overflow-hidden"
-        >
-          {/* Glare effect inside the button */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
-          <span className="relative z-10">Unlock Early Access</span>
-        </button>
+      <button
+      type="submit"
+      className="group relative inline-flex items-center justify-center overflow-hidden rounded-full
+        border border-color-klyth-olive/30
+        bg-color-klyth-olive text-color-klyth-cream
+        px-4 py-2
+        text-[10px] md:text-[11px]
+        font-semibold uppercase tracking-[0.14em]
+        shadow-md
+        transition-all duration-500 ease-out
+        hover:-translate-y-0.5
+        hover:bg-color-klyth-olive/90
+        hover:border-color-klyth-gold/40
+        hover:shadow-[0_8px_20px_rgba(74,93,35,0.25)]"
+      >
+      <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
+        <span className="absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg] transition-transform duration-1000 group-hover:translate-x-[260%]" />
+      </span>
+
+      <span className="relative z-10">Unlock Early Access</span>
+      </button>
       </form>
 
       {/* Subtext */}
