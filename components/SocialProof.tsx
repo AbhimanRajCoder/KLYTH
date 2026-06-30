@@ -11,7 +11,7 @@ interface StatCounterProps {
 const StatCounter = ({ value, suffix }: StatCounterProps) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
     if (!inView) return;
@@ -19,14 +19,13 @@ const StatCounter = ({ value, suffix }: StatCounterProps) => {
     const end = value;
     if (start === end) return;
 
-    const duration = 2500; // 2.5 seconds animation for luxurious feel
+    const duration = 2500;
     const startTime = performance.now();
 
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       
-      // Premium Ease Out Expo formula for elegant deceleration
       const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
       const currentValue = Math.floor(easeProgress * (end - start) + start);
       
@@ -45,9 +44,9 @@ const StatCounter = ({ value, suffix }: StatCounterProps) => {
   };
 
   return (
-    <span ref={ref} className="font-serif font-bold text-6xl sm:text-7xl lg:text-8xl tracking-tight text-color-klyth-cream select-text leading-none">
+    <span ref={ref} className="font-serif font-bold text-7xl sm:text-8xl lg:text-[7vw] tracking-tighter text-klyth-cream select-text leading-none block">
       {formatNumber(count)}
-      <span className="text-color-klyth-gold font-sans ml-1 text-4xl sm:text-5xl lg:text-6xl align-top">{suffix}</span>
+      <span className="text-klyth-gold font-sans ml-1 text-3xl sm:text-4xl lg:text-[3vw] align-top">{suffix}</span>
     </span>
   );
 };
@@ -60,72 +59,82 @@ export default function SocialProof() {
     "Financial Growth, Rewired."
   ];
   
-  // Combine items with spacer star and duplicate for seamless looping
   const marqueeString = marqueeItems.join("   ✦   ") + "   ✦   ";
   const marqueeDouble = [marqueeString, marqueeString, marqueeString, marqueeString];
 
   return (
-    <section className="relative w-full bg-transparent text-color-klyth-cream py-24 sm:py-32 overflow-hidden select-none">
-      
+    <section className="relative w-full bg-transparent text-klyth-cream py-24 sm:py-36 overflow-hidden select-none">
       {/* Decorative background glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[20vw] rounded-full bg-color-klyth-olive/4 blur-[150px]" />
+        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[30vw] rounded-full bg-klyth-olive/3 blur-[160px]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 flex flex-col gap-20 sm:gap-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 flex flex-col gap-24 sm:gap-32">
         {/* Header Block */}
-        <div className="flex flex-col gap-4 text-center max-w-3xl mx-auto">
-          <span className="font-sans font-bold text-xs tracking-[0.2em] uppercase text-color-klyth-gold">
+        <div className="flex flex-col gap-5 text-left max-w-3xl select-text">
+          <span className="font-sans font-bold text-xs tracking-[0.2em] uppercase text-klyth-olive">
             The Community Momentum
           </span>
-          <h2 className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-color-klyth-cream leading-tight select-text">
-            A generation ready to grow differently.
+          <h2 className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-klyth-cream leading-tight">
+            A generation ready to <span className="text-klyth-gold italic">grow differently.</span>
           </h2>
         </div>
 
-        {/* Stats Grid (Editorial Layout) */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-16 md:gap-0 w-full relative z-10">
+        {/* Stats Layout (Editorial Columnar Grid) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-12 w-full relative z-10">
           
           {/* Stat 1 */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-5 text-center md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col gap-6 items-start justify-start select-text"
+          >
             <StatCounter value={12500} suffix="+" />
-            <span className="font-sans font-semibold text-xs sm:text-sm text-color-klyth-cream/60 uppercase tracking-[0.22em] max-w-[220px] leading-relaxed">
-              Waitlisted for the Ecosystem
+            <div className="w-12 h-[1px] bg-klyth-gold/45" />
+            <span className="font-sans font-semibold text-xs sm:text-sm text-klyth-cream/60 uppercase tracking-[0.22em] max-w-[280px] leading-relaxed">
+              Waitlisted for the <span className="text-klyth-gold/50">Ecosystem</span>
             </span>
-          </div>
-
-          {/* Divider (Mobile vs Desktop) */}
-          <div className="block md:hidden w-1/4 h-[1px] bg-gradient-to-r from-transparent via-color-klyth-ghost/40 to-transparent mx-auto" />
-          <div className="hidden md:block w-[1px] h-28 bg-gradient-to-b from-transparent via-color-klyth-ghost/40 to-transparent" />
+          </motion.div>
 
           {/* Stat 2 */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-5 text-center md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="flex flex-col gap-6 items-start justify-start select-text"
+          >
             <StatCounter value={500} suffix="+" />
-            <span className="font-sans font-semibold text-xs sm:text-sm text-color-klyth-cream/60 uppercase tracking-[0.22em] max-w-[220px] leading-relaxed">
-              Hours of Live Expert Mentorship Delivered
+            <div className="w-12 h-[1px] bg-klyth-olive/45" />
+            <span className="font-sans font-semibold text-xs sm:text-sm text-klyth-cream/60 uppercase tracking-[0.22em] max-w-[280px] leading-relaxed">
+              Hours of <span className="text-klyth-gold/50">Live Expert Mentorship</span> Delivered
             </span>
-          </div>
-
-          {/* Divider (Mobile vs Desktop) */}
-          <div className="block md:hidden w-1/4 h-[1px] bg-gradient-to-r from-transparent via-color-klyth-ghost/40 to-transparent mx-auto" />
-          <div className="hidden md:block w-[1px] h-28 bg-gradient-to-b from-transparent via-color-klyth-ghost/40 to-transparent" />
+          </motion.div>
 
           {/* Stat 3 */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-5 text-center md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="flex flex-col gap-6 items-start justify-start select-text"
+          >
             <StatCounter value={100} suffix="%" />
-            <span className="font-sans font-semibold text-xs sm:text-sm text-color-klyth-cream/60 uppercase tracking-[0.22em] max-w-[220px] leading-relaxed">
-              Focus on Personalized Execution (Zero BS)
+            <div className="w-12 h-[1px] bg-klyth-gold/45" />
+            <span className="font-sans font-semibold text-xs sm:text-sm text-klyth-cream/60 uppercase tracking-[0.22em] max-w-[280px] leading-relaxed">
+              Focus on <span className="text-klyth-gold/50">Personalized Execution</span> (Zero BS)
             </span>
-          </div>
-
+          </motion.div>
         </div>
       </div>
 
-      {/* Infinite Looping Marquee */}
+      {/* Infinite Looping Editorial Ribbon */}
       <div
         onMouseEnter={() => setIsMarqueeHovered(true)}
         onMouseLeave={() => setIsMarqueeHovered(false)}
-        className="relative mt-24 py-6 border-y border-color-klyth-ghost/15 bg-color-klyth-charcoal/30 w-full overflow-hidden flex z-10 pointer-events-auto cursor-default group"
+        className="relative mt-28 py-8 border-y border-klyth-ghost/15 w-full overflow-hidden flex z-10 pointer-events-auto cursor-default transition-colors duration-500 hover:border-klyth-ghost/35"
       >
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
@@ -133,15 +142,15 @@ export default function SocialProof() {
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: isMarqueeHovered ? 160 : 40,
+              duration: isMarqueeHovered ? 120 : 35,
               ease: "linear"
             }
           }}
           style={{ willChange: "transform" }}
           className={`flex whitespace-nowrap gap-8 font-serif italic tracking-wider leading-none select-none min-w-max transition-all duration-700 ${
             isMarqueeHovered
-              ? "text-color-klyth-gold/45 drop-shadow-[0_0_15px_rgba(226,184,66,0.25)] text-3xl sm:text-4xl lg:text-5xl"
-              : "text-color-klyth-cream/8 text-2xl sm:text-3xl lg:text-4xl"
+              ? "text-klyth-gold/35 text-3xl sm:text-4xl lg:text-5xl"
+              : "text-klyth-cream/10 text-2xl sm:text-3xl lg:text-4xl"
           }`}
         >
           {marqueeDouble.map((text, idx) => (
@@ -151,7 +160,6 @@ export default function SocialProof() {
           ))}
         </motion.div>
       </div>
-
     </section>
   );
 }
