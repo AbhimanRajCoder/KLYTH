@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
+      className={`${playfair.variable} ${inter.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
@@ -41,7 +41,7 @@ export default function RootLayout({
           referrerPolicy="no-referrer"
         />
       </head>
-      <body className="min-h-full bg-klyth-charcoal text-klyth-cream selection:bg-klyth-olive/30 flex flex-col font-sans">
+      <body className="bg-klyth-charcoal text-klyth-cream selection:bg-klyth-olive/30 flex flex-col font-sans">
         <AppShell>{children}</AppShell>
       </body>
     </html>

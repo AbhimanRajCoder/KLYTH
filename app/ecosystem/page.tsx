@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import EcosystemHero from "@/components/EcosystemHero";
 import EcosystemPillar1 from "@/components/EcosystemPillar1";
 import EcosystemPillar2 from "@/components/EcosystemPillar2";
@@ -10,7 +13,12 @@ import EcosystemFinalCTA from "@/components/EcosystemFinalCTA";
 
 export default function EcosystemPage() {
   return (
-    <main className="flex flex-col w-full bg-color-klyth-charcoal">
+    <motion.main 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.2, ease: "easeInOut" }}
+      className="flex flex-col w-full bg-klyth-charcoal min-h-screen text-klyth-cream overflow-hidden"
+    >
       <EcosystemHero />
       <EcosystemPillar1 />
       <EcosystemPillar2 />
@@ -20,6 +28,6 @@ export default function EcosystemPage() {
       <EcosystemPillar6 />
       <EcosystemPillar7 />
       <EcosystemFinalCTA />
-    </main>
+    </motion.main>
   );
 }

@@ -1,70 +1,69 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 
+const premiumEase = [0.16, 1, 0.3, 1];
+
 export default function EcosystemPillar7() {
-  const cards = [1, 2, 3];
+  const newsItems = [
+    { title: "Q3 Budget Breakdown", date: "Today" },
+    { title: "Taxation Shifts 2024", date: "Yesterday" },
+    { title: "Macro Market Trends", date: "Oct 12" },
+    { title: "Interest Rate Adjustments", date: "Oct 10" },
+    { title: "Global Inflation Impact", date: "Oct 05" }
+  ];
 
   return (
-    <section className="relative w-full bg-color-klyth-charcoal text-color-klyth-cream py-24 sm:py-32 px-6 sm:px-12 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* News cards visual */}
-          <div className="order-2 lg:order-1 flex items-center justify-center">
-            <div className="relative w-full max-w-xs h-80">
-              {cards.map((card, idx) => (
-                <motion.div
-  key={idx}
-  className="absolute w-full klyth-glass rounded-[24px] border border-color-klyth-ghost p-5"
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, margin: "-100px" }}
-  animate={{
-    y: [idx * -10, idx * -10 - 10, idx * -10],
-  }}
-  transition={{
-    duration: 3,
-    repeat: Infinity,
-    ease: "easeInOut",
-    delay: idx * 0.5,
-  }}
-  whileHover={{
-    y: idx * -10 - 15,
-  }}
-  style={{
-    top: `${idx * 20}px`,
-    zIndex: cards.length - idx,
-  }}
->
-                  <div className="w-16 h-16 bg-color-klyth-ghost/30 rounded-xl mb-4 flex items-center justify-center">
-                    <i className="fa-solid fa-newspaper text-2xl text-color-klyth-cream/50" />
-                  </div>
-                  <div className="h-3 bg-color-klyth-ghost/30 rounded-full mb-2 w-3/4" />
-                  <div className="h-3 bg-color-klyth-ghost/30 rounded-full mb-2 w-full" />
-                  <div className="h-3 bg-color-klyth-ghost/30 rounded-full w-5/6" />
-                </motion.div>
-              ))}
-            </div>
-          </div>
+    <section className="relative w-full py-48 px-6 bg-klyth-charcoal z-10 flex flex-col md:flex-row-reverse items-center justify-center gap-16 md:gap-32 overflow-hidden">
+      
+      {/* Background Soft Glow */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] bg-klyth-olive/5 blur-[150px] rounded-full pointer-events-none"></div>
 
-          {/* Text content */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="order-1 lg:order-2"
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold leading-tight mb-6">
-              Bite-Sized Financial Intelligence
-            </h2>
-            <p className="text-base sm:text-lg text-color-klyth-cream/70 font-sans leading-relaxed">
-              A weekly briefing translating complex macroeconomic currents, policy, and venture trends into simple, high-signal ideas for youth.
-            </p>
-          </motion.div>
-        </div>
+      {/* Content Side */}
+      <motion.div 
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 1.5, ease: premiumEase }}
+        className="max-w-xl w-full flex flex-col items-start relative z-10"
+      >
+        <span className="font-sans font-medium uppercase tracking-[0.3em] text-klyth-olive text-[10px] mb-6">
+          Real-Time Clarity
+        </span>
+        <h2 className="font-serif text-4xl md:text-5xl font-semibold mb-8 text-klyth-cream leading-tight">
+          Macro Insights Built <br /><span className="italic text-klyth-cream/90">for the Youth.</span>
+        </h2>
+        <p className="font-sans text-klyth-cream/50 text-lg leading-relaxed mb-10 font-light">
+          Traditional financial news is dense, intimidating, and intentionally inaccessible. We strip away the jargon. Klyth translates complex macroeconomic events—like massive market trends, taxation shifts, and national budget announcements—into crisp, highly relevant content delivered straight to your inbox through our exclusive email newsletter. We deliver pure, actionable intelligence focused on one thing: exactly how the broader economy impacts your personal wallet today.
+        </p>
+      </motion.div>
+
+      {/* Visual Side: News Feed Ticker (Cascading Stack) */}
+      <div className="relative w-full max-w-sm h-[500px] overflow-hidden mask-image-[linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)] flex justify-center z-10">
+        <motion.div 
+          animate={{ y: ["0%", "-50%"] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          whileHover={{ animationPlayState: "paused" }} // Ticker pause on hover
+          className="flex flex-col gap-6 absolute top-0 w-full px-4"
+        >
+          {/* Double the list to create a seamless loop */}
+          {[...newsItems, ...newsItems].map((item, i) => (
+            <div 
+              key={i} 
+              className="w-full bg-[#1C1C1E]/40 backdrop-blur-2xl p-6 rounded-2xl border border-white/5 flex flex-col hover:bg-[#1C1C1E]/60 transition-colors duration-500 cursor-default group"
+            >
+               <span className="font-sans text-[10px] tracking-[0.2em] text-klyth-gold/60 font-medium mb-3 uppercase transition-colors duration-500 group-hover:text-klyth-gold/90">{item.date}</span>
+               <h4 className="font-serif text-xl text-klyth-cream/80 transition-colors duration-500 group-hover:text-white">{item.title}</h4>
+               <div className="mt-6 flex gap-2">
+                 <div className="w-full h-[2px] bg-white/5 rounded-full overflow-hidden">
+                    <div className="w-1/3 h-full bg-klyth-olive/30 transition-colors duration-500 group-hover:bg-klyth-olive/70"></div>
+                 </div>
+               </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
+      
     </section>
   );
 }

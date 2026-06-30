@@ -1,92 +1,78 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-interface Bubble {
-  x: number;
-  y: number;
-  size: number;
-  duration: number;
-  delay: number;
-}
+const premiumEase = [0.16, 1, 0.3, 1];
 
 export default function EcosystemPillar6() {
-  const [bubbles, setBubbles] = useState<Bubble[]>([]);
+  const [bubbles, setBubbles] = useState<Array<{ id: number; x: number; y: number; delay: number }>>([]);
 
   useEffect(() => {
-    const newBubbles: Bubble[] = [];
-    for (let i = 0; i < 6; i++) {
-      newBubbles.push({
-        x: Math.random() * 80 + 10,
-        y: Math.random() * 80 + 10,
-        size: Math.random() * 40 + 40,
-        duration: 4 + Math.random() * 4,
-        delay: Math.random() * 2,
-      });
+    if (typeof window !== "undefined") {
+      const isMobile = window.innerWidth < 768;
+      const count = isMobile ? 6 : 12; // Extremely restrained for premium feel
+      setBubbles(
+        Array.from({ length: count }).map((_, i) => ({
+          id: i,
+          x: Math.random() * 80 + 10,
+          y: Math.random() * 80 + 10,
+          delay: Math.random() * 10
+        }))
+      );
     }
-    setBubbles(newBubbles);
   }, []);
 
   return (
-    <section className="relative w-full bg-color-klyth-charcoal text-color-klyth-cream py-24 sm:py-32 px-6 sm:px-12 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-color-klyth-olive/50 bg-color-klyth-olive/10 mb-6 mx-auto">
-            <i className="fa-solid fa-flask text-color-klyth-olive text-xs animate-pulse" />
-            <span className="font-sans text-xs font-medium text-color-klyth-olive tracking-wider uppercase">
-              In Beta
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold leading-tight mb-4">
-            The Community Ecosystem: Breaking the Money Taboo
-          </h2>
-          <p className="text-base sm:text-lg text-color-klyth-cream/70 font-sans max-w-2xl mx-auto">
-            A highly moderated peer network for open, structured conversations about earnings, equity, growth experiments, and wealth frameworks.
-          </p>
-        </div>
+    <section className="relative w-full py-48 px-6 bg-klyth-charcoal z-10 overflow-hidden flex items-center justify-center">
+      
+      {/* Background Soft Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/5 blur-[150px] rounded-full pointer-events-none"></div>
 
-        {/* Bubbles visual */}
-        <div className="relative h-64 sm:h-80">
-          {bubbles.map((bubble, idx) => (
-            <motion.div
-              key={idx}
-              className="absolute klyth-glass rounded-full flex items-center justify-center border border-color-klyth-ghost"
-              style={{
-                width: bubble.size,
-                height: bubble.size,
-                left: `${bubble.x}%`,
-                top: `${bubble.y}%`,
-                transform: "translate(-50%, -50%)",
-              }}
-              animate={{
-                x: [
-                  `${bubble.x}%`,
-                  `${bubble.x + (Math.random() - 0.5) * 10}%`,
-                  `${bubble.x}%`,
-                ],
-                y: [
-                  `${bubble.y}%`,
-                  `${bubble.y + (Math.random() - 0.5) * 10}%`,
-                  `${bubble.y}%`,
-                ],
-              }}
-              transition={{
-                duration: bubble.duration,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: bubble.delay,
-              }}
-              whileHover={{
-                scale: 1.2,
-                boxShadow: "0 0 30px rgba(74,93,35,0.3)",
-              }}
-            >
-              <i className="fa-solid fa-comment text-color-klyth-cream/50" />
-            </motion.div>
-          ))}
-        </div>
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 pointer-events-auto overflow-hidden">
+        {bubbles.map((b) => (
+          <motion.div
+            key={b.id}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ 
+              opacity: [0.05, 0.2, 0.05],
+              scale: 1,
+              x: [`${b.x}vw`, `${b.x + (Math.random() * 6 - 3)}vw`, `${b.x}vw`],
+              y: [`${b.y}vh`, `${b.y + (Math.random() * 6 - 3)}vh`, `${b.y}vh`]
+            }}
+            transition={{ duration: 25 + Math.random() * 20, repeat: Infinity, delay: b.delay, ease: "linear" }}
+            whileHover={{ scale: 1.1, opacity: 0.5, borderColor: "rgba(255,255,255,0.2)" }} 
+            className="absolute w-14 h-14 rounded-full border border-white/5 bg-[#1C1C1E]/20 backdrop-blur-xl flex items-center justify-center cursor-default transition-all duration-1000 ease-out"
+            style={{ left: `${b.x}%`, top: `${b.y}%` }}
+          >
+             <div className="w-1.5 h-1.5 rounded-full bg-klyth-cream/20"></div>
+          </motion.div>
+        ))}
       </div>
+
+      {/* Content Block */}
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 1.5, ease: premiumEase }}
+        className="max-w-3xl w-full flex flex-col items-center text-center relative z-10 pointer-events-none"
+      >
+        <span className="font-sans font-medium uppercase tracking-[0.3em] text-klyth-olive text-[10px] mb-6">
+          Peer Accountability
+        </span>
+        <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 text-klyth-cream leading-tight">
+          Breaking the Money Taboo, <br /><span className="italic text-klyth-cream/90">Together.</span>
+        </h2>
+        <span className="font-sans text-klyth-gold/80 text-[11px] uppercase tracking-widest font-medium mb-10 px-4 py-1.5 bg-klyth-gold/5 border border-klyth-gold/20 rounded-full inline-block backdrop-blur-md">
+          Currently in beta
+        </span>
+        <p className="font-sans text-klyth-cream/50 text-lg md:text-xl leading-relaxed font-light">
+          Wealth grows best when knowledge is shared openly. Beyond our core digital platform, we provide a moderated, highly active peer-to-peer ecosystem where young Indians can safely discuss personal finance. Through dedicated forums and real-time channels, users can celebrate milestones, ask "stupid" questions without fear of judgment, and learn directly from the real-world financial journeys and mistakes of their peers. You are never navigating this alone.
+        </p>
+      </motion.div>
+      
     </section>
   );
 }

@@ -1,118 +1,92 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-interface Particle {
-  x: number;
-  y: number;
-  size: number;
-  id: number;
-}
+const premiumEase = [0.16, 1, 0.3, 1]; // Buttery smooth Apple-like bezier curve
 
 export default function EcosystemHero() {
-  const [particles, setParticles] = useState<Particle[]>([]);
-  const [isMobile, setIsMobile] = useState(true);
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number }>>([]);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    // Generate particles
-    const count = isMobile ? 20 : 40;
-    const newParticles: Particle[] = [];
-    for (let i = 0; i < count; i++) {
-      newParticles.push({
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 3 + 1,
-        id: i,
-      });
+    if (typeof window !== "undefined") {
+      const isMobile = window.innerWidth < 768;
+      const count = isMobile ? 12 : 30; // Reduced for premium subtlety
+      setParticles(
+        Array.from({ length: count }).map((_, i) => ({
+          id: i,
+          x: Math.random() * 100,
+          y: Math.random() * 100,
+        }))
+      );
     }
-    setParticles(newParticles);
-
-    return () => window.removeEventListener("resize", checkMobile);
-  }, [isMobile]);
+  }, []);
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center bg-color-klyth-charcoal text-color-klyth-cream px-6 sm:px-12 overflow-hidden">
-      {/* Background particle mesh */}
-      <div className="absolute inset-0 overflow-hidden">
-        <svg className="w-full h-full" style={{ position: "absolute", top: 0, left: 0 }}>
-          {particles.map((p1) =>
-            particles.map((p2) => {
-              if (p1.id === p2.id) return null;
-              const distance = Math.sqrt(
-                Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2)
-              );
-              if (distance > 25) return null;
-              return (
-                <motion.line
-                  key={`line-${p1.id}-${p2.id}`}
-                  x1={`${p1.x}%`}
-                  y1={`${p1.y}%`}
-                  x2={`${p2.x}%`}
-                  y2={`${p2.y}%`}
-                  stroke="rgba(74,93,35,0.2)"
-                  strokeWidth="1"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1.5 }}
-                />
-              );
-            })
-          )}
-          {particles.map((particle) => (
-            <motion.circle
-              key={particle.id}
-              cx={`${particle.x}%`}
-              cy={`${particle.y}%`}
-              r={particle.size}
-              fill="rgba(226,184,66,0.4)"
-              animate={{
-                cx: [
-                  `${particle.x}%`,
-                  `${particle.x + (Math.random() - 0.5) * 10}%`,
-                  `${particle.x}%`,
-                ],
-                cy: [
-                  `${particle.y}%`,
-                  `${particle.y + (Math.random() - 0.5) * 10}%`,
-                  `${particle.y}%`,
-                ],
-              }}
-              transition={{
-                duration: 5 + Math.random() * 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
+    <section className="relative w-full min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden z-10 bg-klyth-charcoal">
+      
+      {/* Background Soft Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-klyth-olive/5 blur-[150px] rounded-full pointer-events-none"></div>
+
+      {/* Background Visual: Subtle Mesh Network */}
+      <div className="absolute inset-0 pointer-events-none opacity-15">
+        {particles.map((p, i) => (
+          <motion.div
+            key={p.id}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: [0.05, 0.3, 0.05],
+              x: [`${p.x}vw`, `${p.x + (Math.random() * 4 - 2)}vw`, `${p.x}vw`],
+              y: [`${p.y}vh`, `${p.y + (Math.random() * 4 - 2)}vh`, `${p.y}vh`]
+            }}
+            transition={{ duration: 15 + Math.random() * 15, repeat: Infinity, ease: "linear" }}
+            className="absolute w-1 h-1 bg-klyth-cream rounded-full"
+            style={{ left: `${p.x}%`, top: `${p.y}%` }}
+          />
+        ))}
+        <svg className="absolute inset-0 w-full h-full opacity-20">
+          {particles.slice(0, 12).map((p, i) => {
+            const next = particles[(i + 1) % 12];
+            return (
+              <motion.line
+                key={`line-${i}`}
+                x1={`${p.x}%`}
+                y1={`${p.y}%`}
+                x2={`${next?.x || 50}%`}
+                y2={`${next?.y || 50}%`}
+                stroke="rgba(255, 255, 255, 0.05)"
+                strokeWidth="0.5"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: [0, 1, 0] }}
+                transition={{ duration: 20 + Math.random() * 10, repeat: Infinity, ease: "linear" }}
+              />
+            );
+          })}
         </svg>
       </div>
 
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 rounded-full bg-color-klyth-olive/10 blur-[120px]" />
-
-      <div className="relative z-10 max-w-5xl mx-auto text-center">
-        <motion.h1
-          initial={{ opacity: 0, filter: "blur(10px)", scale: 1.05 }}
+      <motion.div
+        className="max-w-4xl mx-auto flex flex-col items-center relative z-10"
+      >
+        <motion.h1 
+          initial={{ opacity: 0, filter: "blur(20px)", scale: 1.05 }}
           animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold leading-tight mb-6"
+          transition={{ duration: 1.5, ease: premiumEase }}
+          className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8 text-klyth-cream"
         >
-          Financial Growth, Rewired. Inside the Ecosystem.
+          Financial Growth, Rewired. <br className="hidden md:block" />
+          <span className="italic font-normal text-klyth-cream/80">Inside the Ecosystem.</span>
         </motion.h1>
-        <motion.p
+
+        <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.7 }}
-          className="text-lg sm:text-xl md:text-2xl text-color-klyth-cream/70 font-sans max-w-3xl mx-auto"
+          transition={{ duration: 1.5, delay: 0.4, ease: premiumEase }}
+          className="font-sans text-lg md:text-xl text-klyth-cream/50 max-w-3xl leading-relaxed font-light"
         >
           We are not building just another course you will buy and abandon. We are building a comprehensive cultural layer—fusing behavioral technology, real-world action, and peer accountability to make financial growth a daily, automatic habit.
         </motion.p>
-      </div>
+      </motion.div>
     </section>
   );
 }

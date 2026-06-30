@@ -45,7 +45,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
+        className={`!fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
           isScrolled
             ? "klyth-glass py-4 border-color-klyth-gold/30 shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
             : "bg-transparent py-6 border-transparent"
