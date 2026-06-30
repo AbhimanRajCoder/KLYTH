@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const premiumEase = [0.16, 1, 0.3, 1];
+const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export default function CampusHero() {
   const [nodes, setNodes] = useState<Array<{ id: number; x: number; y: number }>>([]);

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const premiumEase = [0.16, 1, 0.3, 1]; // Buttery smooth Apple-like bezier curve
+const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1]; // Buttery smooth Apple-like bezier curve
 
 export default function EcosystemHero() {
   const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number }>>([]);

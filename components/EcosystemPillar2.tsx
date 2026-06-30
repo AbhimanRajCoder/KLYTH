@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRef, useState } from "react";
 
-const premiumEase = [0.16, 1, 0.3, 1];
+const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export default function EcosystemPillar2() {
   const scrollRef = useRef<HTMLDivElement>(null);

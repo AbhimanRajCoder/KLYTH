@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-const premiumEase = [0.16, 1, 0.3, 1];
+const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export default function EcosystemPillar4() {
   const containerRef = useRef<HTMLElement>(null);
