@@ -82,7 +82,7 @@ export default function EcosystemPersonalLayer() {
 
             {/* Right Visual Side - UI State 2 */}
             <div className="relative w-full flex items-center justify-center lg:justify-start order-1 lg:order-2">
-              <div className="w-[85%] sm:w-full max-w-[280px] md:max-w-sm aspect-[1/1.6] md:aspect-[1/1.7] klyth-glass rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-center border border-white/5 shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-2xl" style={{ marginLeft: "28%" }} >
+              <div className="w-[85%] sm:w-full max-w-[280px] md:max-w-sm aspect-[1/1.6] md:aspect-[1/1.7] klyth-glass rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-center border border-white/5 shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-2xl lg:ml-[28%]">
                 <div className="flex flex-col gap-0 relative">
                   {[
                     { day: "Day 01", title: "Foundation Check" },

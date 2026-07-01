@@ -100,7 +100,9 @@ export default function Navbar() {
             className="lg:hidden text-klyth-cream hover:text-klyth-gold transition-colors p-2 focus:outline-none"
             aria-label="Open navigation menu"
           >
-            <i className="fa-solid fa-bars text-xl"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
           </button>
         </div>
       </header>
@@ -136,7 +138,9 @@ export default function Navbar() {
                 className="text-klyth-cream hover:text-klyth-gold transition-colors p-2 focus:outline-none"
                 aria-label="Close navigation menu"
               >
-                <i className="fa-solid fa-xmark text-2xl"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
 
