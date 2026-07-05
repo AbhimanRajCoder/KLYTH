@@ -3,7 +3,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Smartphone, Calendar, Newspaper, Users, Timer, Check, Loader2, ArrowRight, ArrowLeft } from "lucide-react";
+import { submitJoinApplication } from "@/app/actions/join";
+import { toast } from "sonner";
 
 export default function JoinPage() {
   const [step, setStep] = useState(1);
@@ -59,13 +62,29 @@ export default function JoinPage() {
     }, 1200);
   };
 
-  const handleStep2Submit = () => {
+  const handleStep2Submit = async () => {
     if (!selectedGoal) return;
     setIsLoading(true);
-    setTimeout(() => {
+    
+    try {
+      const result = await submitJoinApplication({
+        firstName,
+        email,
+        goal: selectedGoal
+      });
+      
+      if (result.success) {
+        setStep(3);
+        toast.success("Application submitted successfully! Spot reserved.");
+      } else {
+        toast.error(result.message || "Failed to submit application.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
       setIsLoading(false);
-      setStep(3);
-    }, 1000);
+    }
   };
 
   return (
@@ -79,8 +98,14 @@ export default function JoinPage() {
       <div className="relative z-10 w-full max-w-5xl">
         {/* Navigation / Header Brand Logo */}
         <div className="flex justify-between items-center mb-8 px-4">
-          <Link href="/" className="font-serif text-2xl font-bold tracking-tight text-klyth-cream hover:opacity-85 transition-opacity">
-            Klyth<span className="text-klyth-gold">.</span>
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <Image
+              src="/img/Logo.png"
+              alt="Klyth Logo"
+              width={140}
+              height={40}
+              className="w-auto h-7 object-contain transition-transform duration-500 group-hover:scale-105"
+            />
           </Link>
           {step < 3 && (
             <div className="flex items-center gap-2">
@@ -271,18 +296,18 @@ export default function JoinPage() {
                         {goals.map((goal, idx) => {
                           const isActive = selectedGoal === goal;
                           return (
-                            <button
-                              key={idx}
-                              type="button"
-                              onClick={() => setSelectedGoal(goal)}
-                              className={`w-full text-left px-5 py-3.5 rounded-xl transition-all duration-200 text-xs border ${
-                                isActive
-                                  ? "bg-klyth-olive/15 border-klyth-gold text-klyth-cream shadow-[0_0_15px_rgba(226,184,66,0.1)] font-medium"
-                                  : "bg-klyth-charcoal/20 border-klyth-ghost hover:border-klyth-ghost/70 text-klyth-cream/70"
-                              }`}
-                            >
-                              {goal}
-                            </button>
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setSelectedGoal(goal)}
+                          className={`w-full text-left px-5 py-3.5 rounded-xl transition-all duration-200 text-xs border ${
+                            isActive
+                              ? "bg-klyth-olive/15 border-klyth-gold text-klyth-cream shadow-[0_0_15px_rgba(226,184,66,0.1)] font-medium"
+                              : "bg-klyth-charcoal/20 border-klyth-ghost hover:border-klyth-ghost/70 text-klyth-cream/70"
+                          }`}
+                        >
+                          {goal}
+                        </button>
                           );
                         })}
                       </div>

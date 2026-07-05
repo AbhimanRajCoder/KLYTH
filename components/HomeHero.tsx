@@ -248,7 +248,7 @@ export default function HomeHero() {
               className="font-sans font-normal text-base sm:text-lg text-klyth-cream/70 max-w-xl leading-relaxed tracking-wide select-text"
             >
               Empowering a generation to grow financially with confidence. No boring
-              lectures, no financial anxiety—just intuitive systems, daily habits,
+              lectures, no financial anxiety just intuitive systems, daily habits,
               and a community that moves forward together.
             </motion.p>
 

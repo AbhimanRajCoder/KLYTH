@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import AppShell from "@/components/AppShell";
+import { Toaster } from "sonner";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -41,8 +42,9 @@ export default function RootLayout({
           referrerPolicy="no-referrer"
         />
       </head>
-      <body className="bg-klyth-charcoal text-klyth-cream selection:bg-klyth-olive/30 flex flex-col font-sans">
+      <body className="bg-klyth-charcoal text-klyth-cream selection:bg-klyth-olive/30 flex flex-col font-sans overflow-x-hidden min-h-screen w-full">
         <AppShell>{children}</AppShell>
+        <Toaster richColors position="bottom-center" />
       </body>
     </html>
   );

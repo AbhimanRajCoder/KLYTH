@@ -55,3 +55,6 @@ db.db
 Desktop.ini
 .Spotlight-V100
 .Trashes
+
+# SQL scripts
+*.sql
