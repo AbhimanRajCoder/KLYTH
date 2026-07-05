@@ -20,6 +20,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Klyth | Financial Growth, Rewired.",
   description: "Empowering a generation to grow financially with confidence. No boring lectures, no financial anxiety—just intuitive systems, daily habits, and a community that moves forward together.",
+  verification: {
+    google: "jiyUqznHz3a2n--taWZ24D85kfYG7DT3_rbhkjhrDAM",
+  },
 };
 
 export default function RootLayout({
@@ -37,7 +40,7 @@ export default function RootLayout({
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqDSSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />

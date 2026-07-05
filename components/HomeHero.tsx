@@ -90,6 +90,11 @@ export default function HomeHero() {
   ];
 
   const [isHoveringSection, setIsHoveringSection] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, { damping: 50, stiffness: 200 });
@@ -157,24 +162,26 @@ export default function HomeHero() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 15% 15%, rgba(255,255,255,0.015) 0%, transparent 60%)" }} />
 
-        {/* Ambient glows using premium HSL values */}
-        <motion.div
-          animate={{
-            scale: [1, 1.05, 0.98, 1],
-            opacity: [0.04, 0.055, 0.045, 0.04],
-          }}
-          transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-[30%] -left-[10%] w-[120vw] h-[120vw] rounded-full bg-klyth-olive blur-[240px]"
-        />
+        {/* Ambient glows using premium HSL values - Rendered client-side to prevent hydration flicker */}
+        {mounted && (
+          <>
+            <motion.div
+              animate={{
+                opacity: [0.04, 0.055, 0.045, 0.04],
+              }}
+              transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-[30%] -left-[10%] w-[120vw] h-[120vw] rounded-full bg-klyth-olive blur-[240px]"
+            />
 
-        <motion.div
-          animate={{
-            scale: [1, 0.97, 1.03, 1],
-            opacity: [0.015, 0.025, 0.018, 0.015],
-          }}
-          transition={{ duration: 48, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-[20%] right-[-10%] w-[100vw] h-[100vw] rounded-full bg-klyth-gold blur-[260px]"
-        />
+            <motion.div
+              animate={{
+                opacity: [0.015, 0.025, 0.018, 0.015],
+              }}
+              transition={{ duration: 48, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-[20%] right-[-10%] w-[100vw] h-[100vw] rounded-full bg-klyth-gold blur-[260px]"
+            />
+          </>
+        )}
 
         {/* Desktop Cursor spotlight */}
         <motion.div
