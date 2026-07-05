@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { submitContactForm } from "@/app/actions/contact";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -33,15 +34,11 @@ export default function ContactForm() {
     
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
-      if (res.ok) {
+      const res = await submitContactForm(formData);
+      if (res.success) {
         setIsSuccess(true);
       } else {
-        setErrors({ general: "Failed to send message. Please try again." });
+        setErrors({ general: res.message || "Failed to send message. Please try again." });
       }
     } catch (err) {
       setErrors({ general: "A network error occurred." });
