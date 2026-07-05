@@ -1,17 +1,28 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { submitNextChapterSubscription } from "@/app/actions/subscribe";
+import { toast } from "sonner";
 
 export default function FinalCTA() {
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) return;
     
-    // Redirect to join onboarding page with email query parameter
-    window.location.href = `/join?email=${encodeURIComponent(email)}`;
+    setIsSubmitting(true);
+    const res = await submitNextChapterSubscription(email);
+    if (res.success) {
+      toast.success(res.message);
+      setEmail("");
+    } else {
+      toast.error(res.message);
+    }
+    
+    setIsSubmitting(false);
   };
 
   const containerVariants = {
@@ -82,31 +93,41 @@ export default function FinalCTA() {
         </div>
 
         {/* Minimalist Input Capture Portal */}
-        <motion.div variants={fadeUpVariants} className="w-full max-w-xl mx-auto">
-          <form
+        <motion.div variants={fadeUpVariants} className="w-full max-w-xl mx-auto min-h-[80px]">
+          <motion.form
             onSubmit={handleSubmit}
             className="flex flex-col sm:flex-row gap-4 w-full mt-4"
           >
-            <input
-              type="email"
-              required
-              placeholder="Enter your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="flex-grow bg-klyth-obsidian/60 border border-klyth-ghost/50 rounded-full px-8 py-5 text-base md:text-lg text-klyth-cream placeholder:text-klyth-cream/30 focus:outline-none focus:border-klyth-olive transition-all text-center sm:text-left"
-            />
+            <div className="flex-grow relative">
+              <input
+                type="email"
+                required
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSubmitting}
+                className="w-full bg-klyth-obsidian/60 border border-klyth-ghost/50 rounded-full px-8 py-5 text-base md:text-lg text-klyth-cream placeholder:text-klyth-cream/30 focus:outline-none focus:border-klyth-olive transition-all text-center sm:text-left disabled:opacity-50"
+              />
+            </div>
             <button
               type="submit"
-              className="group shrink-0 relative inline-flex items-center justify-center gap-3 px-8 py-5 bg-klyth-olive text-klyth-cream font-sans font-semibold text-xs uppercase tracking-[0.2em] rounded-full border border-klyth-gold/25 hover:border-klyth-gold/60 transition-all duration-500 select-none shadow-[0_8px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_24px_rgba(74,93,35,0.25)] hover:-translate-y-0.5 overflow-hidden min-h-[48px]"
+              disabled={isSubmitting}
+              className="group shrink-0 relative inline-flex items-center justify-center gap-3 px-8 py-5 bg-klyth-olive text-klyth-cream font-sans font-semibold text-xs uppercase tracking-[0.2em] rounded-full border border-klyth-gold/25 hover:border-klyth-gold/60 transition-all duration-500 select-none shadow-[0_8px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_24px_rgba(74,93,35,0.25)] hover:-translate-y-0.5 overflow-hidden min-h-[64px] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
-              {/* Subtle sweep glare */}
-              <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
-                <span className="absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] transition-transform duration-1000 group-hover:translate-x-[260%]" />
-              </span>
-              <span className="relative z-10">Unlock Access</span>
-              <i className="fa-solid fa-arrow-right text-[10px] transition-transform duration-300 group-hover:translate-x-1.5 relative z-10" />
+              {isSubmitting ? (
+                <div className="w-5 h-5 border-2 border-klyth-cream/30 border-t-klyth-cream rounded-full animate-spin relative z-10"></div>
+              ) : (
+                <>
+                  {/* Subtle sweep glare */}
+                  <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
+                    <span className="absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] transition-transform duration-1000 group-hover:translate-x-[260%]" />
+                  </span>
+                  <span className="relative z-10">Unlock Access</span>
+                  <i className="fa-solid fa-arrow-right text-[10px] transition-transform duration-300 group-hover:translate-x-1.5 relative z-10" />
+                </>
+              )}
             </button>
-          </form>
+          </motion.form>
         </motion.div>
 
         {/* Subtext */}
