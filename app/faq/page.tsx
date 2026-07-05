@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FAQ | Klyth",
+  description: "Frequently asked questions about Klyth.",
+};
+
 import FaqHero from "@/components/FaqHero";
 import FaqAccordion from "@/components/FaqAccordion";
 import FaqSupportCTA from "@/components/FaqSupportCTA";

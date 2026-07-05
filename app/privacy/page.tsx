@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Klyth",
+  description: "Klyth Privacy Policy.",
+};
+
 import PrivacyPolicyContent from "@/components/PrivacyPolicyContent";
 
 export default function PrivacyPolicyPage() {

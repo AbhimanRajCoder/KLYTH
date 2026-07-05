@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Campus Chapters | Klyth",
+  description: "Bring financial growth to your university with Klyth Campus Chapters.",
+};
+
 import CampusHero from "@/components/CampusHero";
 import CampusTeaser from "@/components/CampusTeaser";
 import CampusApply from "@/components/CampusApply";

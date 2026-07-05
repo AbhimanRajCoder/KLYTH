@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us | Klyth",
+  description: "Discover the origin, team, and mentorship behind Klyth.",
+};
+
 import AboutHero from "@/components/AboutHero";
 import AboutOrigin from "@/components/AboutOrigin";
 import AboutTeam from "@/components/AboutTeam";

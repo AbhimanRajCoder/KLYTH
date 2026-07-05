@@ -6,7 +6,7 @@ import { MOCK_EVENTS } from "@/lib/eventsService";
 
 export default function EcosystemCommunityLayer() {
   // Get only active (non-closed) events for display
-  const activeEvents = MOCK_EVENTS.filter(e => e.status !== "registration-closed").slice(0, 3);
+  // const activeEvents = MOCK_EVENTS.filter(e => e.status !== "registration-closed").slice(0, 3);
 
   const statusStyles: Record<string, string> = {
     upcoming: "border-klyth-gold/30 text-klyth-gold bg-klyth-gold/5",
@@ -28,7 +28,7 @@ export default function EcosystemCommunityLayer() {
       {/* ---------------------------------------------------- */}
       {/* Phase 1: Expert Access */}
       {/* ---------------------------------------------------- */}
-      <div className="relative w-full flex flex-col items-center">
+      {/* <div className="relative w-full flex flex-col items-center">
         <div className="max-w-4xl mx-auto text-center mb-16 md:mb-20 relative z-20">
           <span className="font-sans font-medium uppercase tracking-[0.3em] text-klyth-olive text-[10px] mb-6 block">
             Expert Access
@@ -41,7 +41,6 @@ export default function EcosystemCommunityLayer() {
           </p>
         </div>
 
-        {/* Event Cards Grid */}
         <div className="max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12">
           {activeEvents.map((event) => {
             const eventDate = new Date(event.date).toLocaleDateString("en-US", {
@@ -56,7 +55,6 @@ export default function EcosystemCommunityLayer() {
                 href={`/events/${event.slug}`}
                 className="group klyth-glass rounded-[2rem] p-6 md:p-8 flex flex-col justify-between border border-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-2xl transition-all duration-500 hover:border-white/10 hover:-translate-y-1"
               >
-                {/* Top: Badge Row */}
                 <div className="flex items-center justify-between mb-6">
                   <span className={`font-sans text-[8px] uppercase tracking-widest px-3 py-1 border rounded-full select-none ${statusStyles[event.status] || ""}`}>
                     {statusLabels[event.status] || event.status}
@@ -66,22 +64,18 @@ export default function EcosystemCommunityLayer() {
                   </span>
                 </div>
 
-                {/* Category */}
                 <span className="font-sans text-klyth-gold/60 text-[10px] tracking-[0.2em] uppercase font-medium mb-3">
                   {event.category}
                 </span>
 
-                {/* Title */}
                 <h3 className="font-serif text-xl md:text-2xl text-klyth-cream leading-tight mb-3 group-hover:text-white transition-colors duration-300">
                   {event.title}
                 </h3>
 
-                {/* Subtitle */}
                 <p className="font-sans text-xs text-klyth-cream/40 leading-relaxed line-clamp-2 mb-6">
                   {event.subtitle}
                 </p>
 
-                {/* Tags */}
                 <div className="flex flex-wrap gap-1.5 mb-6">
                   {event.tags.slice(0, 3).map((tag, idx) => (
                     <span key={idx} className="font-sans text-[8px] text-klyth-cream/30 border border-white/5 bg-white/[0.02] px-2.5 py-1 rounded-full">
@@ -90,7 +84,6 @@ export default function EcosystemCommunityLayer() {
                   ))}
                 </div>
 
-                {/* Bottom: Host + Date */}
                 <div className="mt-auto pt-6 border-t border-white/5 flex justify-between items-center">
                   <div className="flex flex-col">
                     <span className="font-sans text-[8px] uppercase tracking-widest text-klyth-cream/30 mb-1">Hosted by</span>
@@ -106,11 +99,10 @@ export default function EcosystemCommunityLayer() {
           })}
         </div>
 
-        {/* CTA Button */}
         <Link href="/events" className="klyth-btn klyth-btn-primary">
           Explore All Events
         </Link>
-      </div>
+      </div> */}
 
 
       {/* ---------------------------------------------------- */}

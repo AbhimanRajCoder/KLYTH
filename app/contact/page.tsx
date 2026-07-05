@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us | Klyth",
+  description: "Get in touch with the Klyth team.",
+};
+
 import ContactHero from "@/components/ContactHero";
 import ContactForm from "@/components/ContactForm";
 import ContactDirectory from "@/components/ContactDirectory";

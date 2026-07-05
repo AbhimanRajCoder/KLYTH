@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Join Klyth | Secure Your Spot",
-  description: "Secure your priority invitation to Klyth.",
+  title: "Events & AMAs | Klyth",
+  description: "Secure closed-door sessions with industry leaders and financial experts.",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

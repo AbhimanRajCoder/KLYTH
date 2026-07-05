@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | Klyth",
+  description: "Klyth Terms of Service.",
+};
+
 import TermsOfServiceContent from "@/components/TermsOfServiceContent";
 
 export default function TermsOfServicePage() {
