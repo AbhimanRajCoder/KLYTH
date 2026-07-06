@@ -91,7 +91,7 @@ export default function SocialProof() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const }}
             className="flex flex-col gap-6 items-center lg:items-start justify-center lg:justify-start text-center lg:text-left select-text"
           >
-            <StatCounter value={12500} suffix="+" />
+            <StatCounter value={2500} suffix="+" />
             <div className="w-12 h-[1px] bg-klyth-gold/45 mx-auto lg:mx-0" />
             <span className="font-sans font-semibold text-xs sm:text-sm text-klyth-cream/60 uppercase tracking-[0.22em] max-w-[280px] leading-relaxed">
               Waitlisted for the <span className="text-klyth-gold/50">Ecosystem</span>
@@ -106,7 +106,7 @@ export default function SocialProof() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const, delay: 0.1 }}
             className="flex flex-col gap-6 items-center lg:items-start justify-center lg:justify-start text-center lg:text-left select-text"
           >
-            <StatCounter value={500} suffix="+" />
+            <StatCounter value={30} suffix="+" />
             <div className="w-12 h-[1px] bg-klyth-olive/45 mx-auto lg:mx-0" />
             <span className="font-sans font-semibold text-xs sm:text-sm text-klyth-cream/60 uppercase tracking-[0.22em] max-w-[280px] leading-relaxed">
               Hours of <span className="text-klyth-gold/50">Live Expert Mentorship</span> Delivered

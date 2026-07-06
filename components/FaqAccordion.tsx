@@ -33,17 +33,17 @@ export default function FaqAccordion() {
   };
 
   return (
-    <section className="relative w-full py-12 px-4 md:px-6 z-10 flex flex-col items-center">
-      <div className="w-full max-w-[780px] flex flex-col items-center text-center mb-16">
-        <span className="font-sans font-medium uppercase tracking-[0.2em] text-klyth-olive text-xs mb-4">
+    <section className="relative w-full py-20 md:py-32 px-4 md:px-6 z-10 flex flex-col items-center">
+      <div className="w-full max-w-[780px] flex flex-col items-center text-center mb-24">
+        <span className="font-sans font-medium uppercase tracking-[0.2em] text-klyth-olive text-xs mb-6">
           The Details
         </span>
-        <h2 className="font-serif text-3xl md:text-4xl font-semibold text-klyth-cream">
+        <h2 className="font-serif text-3xl md:text-5xl font-semibold text-klyth-cream">
           Frequently Asked Questions
         </h2>
       </div>
 
-      <div className="w-full max-w-[780px] flex flex-col gap-6">
+      <div className="w-full max-w-[780px] flex flex-col gap-8">
         {faqs.map((faq, index) => {
           const isOpen = openIndex === index;
           return (

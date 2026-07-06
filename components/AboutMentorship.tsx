@@ -42,6 +42,10 @@ export default function AboutMentorship() {
 
         <div className="flex flex-col gap-6 mt-4">
           <div className="flex flex-col gap-1">
+             <h4 className="font-sans font-semibold text-white text-sm">Incubators:</h4>
+             <p className="font-sans text-klyth-cream/50 text-sm font-light">Selected into the Startup Foundry 2026 Cohort, backed by Mr. Udit Goyal (COO @ Google Cloud India) and Mr. Vivek Sridhar (CTO @ Microsoft for Startups).</p>
+          </div>
+          <div className="flex flex-col gap-1">
              <h4 className="font-sans font-semibold text-klyth-cream text-sm">Startup Accelerators:</h4>
              <p className="font-sans text-klyth-cream/50 text-sm font-light">Actively participating in elite, high-growth tech cohorts designed to scale platforms from MVP to mass market.</p>
           </div>

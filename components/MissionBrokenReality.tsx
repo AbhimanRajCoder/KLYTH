@@ -45,8 +45,11 @@ const FlipCard = ({ gaveUs, needed, index, iconGave, iconNeeded }: FlipCardProps
     <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={() => setIsFlipped(!isFlipped)}
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => {
+        setIsFlipped(false);
+        handleMouseLeave();
+      }}
       initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -93,7 +96,7 @@ const FlipCard = ({ gaveUs, needed, index, iconGave, iconNeeded }: FlipCardProps
               {gaveUs}
             </p>
             <div className="mt-3 flex items-center gap-1.5 text-[10px] text-klyth-cream/30 font-sans tracking-wide">
-              <span>Click to flip</span>
+              <span>Hover to reveal</span>
             </div>
           </div>
         </div>

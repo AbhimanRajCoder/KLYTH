@@ -78,7 +78,7 @@ export default function ContactForm() {
               <div className="text-red-400 text-sm mb-4 font-sans">{errors.general}</div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               {/* First Name */}
               <div className="relative group">
                 <input
@@ -111,7 +111,7 @@ export default function ContactForm() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               {/* Email */}
               <div className="relative group">
                 <input

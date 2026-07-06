@@ -71,8 +71,8 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`font-sans text-sm font-medium tracking-wide transition-colors duration-300 nav-link-underline ${
-                    isActive ? "text-klyth-cream" : "text-klyth-cream/70 hover:text-klyth-cream"
+                  className={`relative font-sans text-sm font-medium tracking-wide transition-colors duration-300 ${
+                    isActive ? "text-klyth-cream" : "text-klyth-cream/70 hover:text-klyth-cream nav-link-underline"
                   }`}
                 >
                   {link.name}

@@ -70,7 +70,7 @@ export default function MissionHero() {
         </motion.div>
       </div>
 
-      <div className="relative z-20 max-w-7xl mx-auto w-full pt-6">
+      <div className="relative z-20 max-w-7xl mx-auto w-full pt-20 md:pt-32">
         <div className="max-w-5xl">
           <motion.div
             style={{ x: fgTranslateX, y: fgTranslateY }}

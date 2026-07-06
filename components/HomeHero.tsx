@@ -219,7 +219,7 @@ export default function HomeHero() {
         className="relative z-10 w-full flex flex-col lg:flex-row gap-12 lg:gap-8 items-start my-auto pb-12 lg:pb-16"
       >
         {/* Left column: empty spacer to preserve asymmetric offset */}
-        <div className="hidden lg:block lg:w-48 shrink-0" />
+        <div className="hidden lg:block lg:w-16 shrink-0" />
 
         {/* Right column: Headline, Divider, and details */}
         <div className="flex-grow flex flex-col w-full">
