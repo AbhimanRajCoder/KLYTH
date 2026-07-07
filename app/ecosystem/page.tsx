@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion";
 import EcosystemHero from "@/components/ecosystem/EcosystemHero";
-import EcosystemPersonalLayer from "@/components/ecosystem/EcosystemPersonalLayer";
-import EcosystemCommunityLayer from "@/components/ecosystem/EcosystemCommunityLayer";
-import EcosystemMacroLayer from "@/components/ecosystem/EcosystemMacroLayer";
+import Pillar1App from "@/components/ecosystem/Pillar1App";
+import Pillar2Events from "@/components/ecosystem/Pillar2Events";
+import Pillar3Campus from "@/components/ecosystem/Pillar3Campus";
+import Pillar4Institutional from "@/components/ecosystem/Pillar4Institutional";
+import Pillar5Cohorts from "@/components/ecosystem/Pillar5Cohorts";
+import Pillar6Community from "@/components/ecosystem/Pillar6Community";
+import Pillar7Intelligence from "@/components/ecosystem/Pillar7Intelligence";
 import EcosystemFinalCTA from "@/components/ecosystem/EcosystemFinalCTA";
 
 export default function EcosystemPage() {
@@ -16,9 +20,13 @@ export default function EcosystemPage() {
       className="flex flex-col w-full bg-klyth-charcoal min-h-screen text-klyth-cream overflow-x-hidden"
     >
       <EcosystemHero />
-      <EcosystemPersonalLayer />
-      <EcosystemCommunityLayer />
-      <EcosystemMacroLayer />
+      <Pillar1App />
+      <Pillar2Events />
+      <Pillar3Campus />
+      <Pillar4Institutional />
+      <Pillar5Cohorts />
+      <Pillar6Community />
+      <Pillar7Intelligence />
       <EcosystemFinalCTA />
     </motion.main>
   );
