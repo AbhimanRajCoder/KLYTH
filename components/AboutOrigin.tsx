@@ -99,10 +99,10 @@ export default function AboutOrigin() {
   }, [handleNext, handlePrev]);
 
   return (
-    <section className="relative w-full pt-24 sm:pt-32 pb-24 sm:pb-32 z-10 flex flex-col items-center justify-start overflow-hidden min-h-screen bg-[#0a0a0a]">
+    <section className="relative w-full pt-12 sm:pt-32 pb-28 sm:pb-32 z-10 flex flex-col items-center justify-start overflow-hidden min-h-0 sm:min-h-screen bg-[#0a0a0a]">
       
       {/* Top Content */}
-      <div className="w-full max-w-5xl px-6 text-center mb-16 sm:mb-24 flex flex-col items-center relative z-40">
+      <div className="w-full max-w-5xl px-6 text-center mb-10 sm:mb-24 flex flex-col items-center relative z-40">
         <motion.span 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -138,7 +138,7 @@ export default function AboutOrigin() {
       </div>
 
       {/* Scattered Polaroids - Full Width */}
-      <div className="relative w-full h-[65vw] sm:h-[80vh] min-h-[280px] sm:min-h-[500px] flex items-center justify-center mb-16 sm:mb-0">
+      <div className="relative w-full h-[65vw] sm:h-[80vh] min-h-[280px] sm:min-h-[500px] flex items-center justify-center mb-12 sm:mb-0">
         {journeyData.map((slide, i) => {
           let distance = i - currentIndex;
           if (distance > journeyData.length / 2) distance -= journeyData.length;
@@ -193,7 +193,7 @@ export default function AboutOrigin() {
                   setIsAutoplay(false);
                 }
               }}
-              className={`absolute w-[90vw] sm:w-[75vw] lg:w-[65vw] xl:w-[55vw] max-w-[1000px] aspect-[1.8/1] sm:aspect-[2/1] bg-[#F9F6F0] p-3 sm:p-5 pb-16 sm:pb-24 rounded-md shadow-2xl will-change-transform ${isActive ? 'cursor-default' : 'cursor-pointer hover:shadow-3xl'}`}
+              className={`absolute w-[90vw] sm:w-[75vw] lg:w-[65vw] xl:w-[55vw] max-w-[1000px] aspect-[1.1/1] sm:aspect-[2/1] bg-[#F9F6F0] p-3 sm:p-5 pb-32 sm:pb-28 rounded-md shadow-2xl will-change-transform ${isActive ? 'cursor-default' : 'cursor-pointer hover:shadow-3xl'}`}
             >
               {/* Polaroid Image */}
               <div className="relative w-full h-full bg-[#1A1A1A] rounded-sm overflow-hidden pointer-events-none">
@@ -211,29 +211,44 @@ export default function AboutOrigin() {
               </div>
 
               {/* Polaroid Text at the bottom */}
-              <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-24 flex items-center justify-between px-4 sm:px-8 pointer-events-none">
-                <div className="flex flex-col">
-                  <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#1A1A1A] mb-1 truncate max-w-[50vw]">
+              <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-28 flex flex-col sm:flex-row items-start sm:items-center justify-center sm:justify-between px-4 sm:px-8 py-3 sm:py-0 pointer-events-none">
+                
+                <div className="flex flex-col w-full sm:w-auto">
+                  {/* Mobile-only Badge and Year (Top of text section) */}
+                  <div className="flex items-center justify-between sm:hidden w-full mb-1">
+                     <span className="font-mono text-[10px] text-[#1A1A1A]/50 tracking-wider">
+                      {slide.year}
+                    </span>
+                    <div className="px-2 py-1 bg-black/5 rounded-xl flex items-center justify-center">
+                      <span className="text-[9px] font-medium text-[#1A1A1A] uppercase tracking-wide">
+                        {slide.badge}
+                      </span>
+                    </div>
+                  </div>
+
+                  <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#1A1A1A] mb-1 truncate max-w-full sm:max-w-[50vw]">
                     {slide.title}
                   </h3>
+                  
                   {isActive && (
                     <motion.p 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.3 }}
-                      className="text-[#1A1A1A]/70 text-xs sm:text-sm font-sans line-clamp-1 sm:line-clamp-none max-w-2xl"
+                      className="text-[#1A1A1A]/70 text-xs sm:text-sm font-sans line-clamp-2 sm:line-clamp-none max-w-full sm:max-w-2xl"
                     >
                       {slide.description}
                     </motion.p>
                   )}
                 </div>
                 
-                <div className="flex flex-col items-end">
-                  <span className="font-mono text-[10px] sm:text-xs text-[#1A1A1A]/50 tracking-wider">
+                {/* Desktop-only Badge and Year (Right side) */}
+                <div className="hidden sm:flex flex-col items-end justify-center">
+                  <span className="font-mono text-[10px] text-[#1A1A1A]/50 tracking-wider">
                     {slide.year}
                   </span>
-                  <div className="mt-1 px-3 py-1 bg-black/5 rounded-full">
-                    <span className="text-xs sm:text-sm font-medium text-[#1A1A1A]">
+                  <div className="mt-1.5 px-3 py-1.5 bg-black/5 rounded-xl flex items-center justify-center">
+                    <span className="text-[10px] font-medium text-[#1A1A1A] uppercase tracking-wide">
                       {slide.badge}
                     </span>
                   </div>
@@ -244,7 +259,7 @@ export default function AboutOrigin() {
         })}
 
         {/* Floating Controls for Autoplay */}
-        <div className="absolute bottom-[-3.5rem] sm:bottom-0 left-1/2 sm:left-auto -translate-x-1/2 sm:translate-x-0 sm:right-12 z-50 flex items-center gap-4 w-max">
+        <div className="absolute bottom-[-6rem] sm:bottom-0 left-1/2 sm:left-auto -translate-x-1/2 sm:translate-x-0 sm:right-12 z-50 flex items-center gap-4 w-max">
           <div className="flex items-center gap-1 sm:gap-2 bg-black/50 backdrop-blur-md border border-white/10 rounded-full p-1.5 shadow-xl">
             <button 
               onClick={handlePrev}
