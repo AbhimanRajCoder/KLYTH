@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
-const premiumEase = [0.16, 1, 0.3, 1];
+const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const journeyData = [
   {
