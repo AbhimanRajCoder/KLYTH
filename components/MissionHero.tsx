@@ -71,11 +71,11 @@ export default function MissionHero() {
         </motion.div>
       </div>
 
-      <div className="relative z-20 max-w-7xl mx-auto w-full pt-20 md:pt-32">
-        <div className="max-w-5xl">
+      <div className="relative z-20 max-w-7xl mx-auto w-full pt-20 md:pt-32 flex flex-col items-center justify-center text-center">
+        <div className="max-w-5xl flex flex-col items-center">
           <motion.div
             style={{ x: fgTranslateX, y: fgTranslateY }}
-            className="flex flex-wrap gap-x-3 gap-y-1 sm:gap-y-2"
+            className="flex flex-wrap justify-center gap-x-3 gap-y-1 sm:gap-y-2"
           >
             {words.map((word, idx) => {
               const isHighlight = word.toLowerCase().includes("money");
@@ -103,7 +103,7 @@ export default function MissionHero() {
           </motion.div>
 
           <motion.p
-            className="mt-6 text-base sm:text-lg text-klyth-cream/65 font-sans max-w-3xl leading-relaxed font-light border-l border-klyth-olive/35 pl-6"
+            className="mt-8 text-base sm:text-lg text-klyth-cream/65 font-sans max-w-3xl leading-relaxed font-light text-center px-4"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 interface FlipCardProps {
   gaveUs: string;
@@ -13,128 +13,127 @@ interface FlipCardProps {
 
 const FlipCard = ({ gaveUs, needed, index, iconGave, iconNeeded }: FlipCardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), { damping: 20, stiffness: 150 });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), { damping: 20, stiffness: 150 });
-  
-  const spotlightX = useSpring(useTransform(mouseX, [-0.5, 0.5], ["0%", "100%"]), { damping: 30, stiffness: 200 });
-  const spotlightY = useSpring(useTransform(mouseY, [-0.5, 0.5], ["0%", "100%"]), { damping: 30, stiffness: 200 });
+  // Spotlight is driven by plain React state (CSS background-position only).
+  // It never touches a transform, so it can never interfere with the flip.
+  const [spotlight, setSpotlight] = useState({ x: 50, y: 50 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const x = (e.clientX - rect.left) / width - 0.5;
-    const y = (e.clientY - rect.top) / height - 0.5;
-    
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setSpotlight({ x, y });
   };
 
   return (
+    // OUTER: layout box only. Fixed size, no transforms here except the
+    // entrance fade/slide, which happens BEFORE any hover interaction and
+    // never runs concurrently with the flip.
     <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => {
-        setIsFlipped(false);
-        handleMouseLeave();
-      }}
       initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      style={{ perspective: 1200 }}
-      className="w-full h-72 cursor-pointer relative select-none group"
+      className="w-full h-48 select-none"
     >
-      <motion.div
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-        }}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-        className="w-full h-full relative"
+      {/* PERSPECTIVE WRAPPER: establishes the 3D space. Fixed size,
+          never moves, never rotates. This is what stops the card from
+          "jumping" — the perspective origin is locked to this box. */}
+      <div
+        className="relative w-full h-full cursor-pointer group"
+        style={{ perspective: "1200px" }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsFlipped(true)}
+        onMouseLeave={() => setIsFlipped(false)}
       >
-        {/* FRONT CARD */}
-        <div
-          className="absolute inset-0 backface-hidden klyth-glass rounded-[24px] p-6 sm:p-8 flex flex-col justify-between border border-klyth-ghost overflow-hidden bg-klyth-obsidian/20"
-          style={{
-            backfaceVisibility: "hidden",
-            transform: "translateZ(0px)",
-          }}
+        {/* FLIP WRAPPER: the ONLY element that rotates. Front and back
+            are permanently stacked inside it via position:absolute/inset-0,
+            so they are always in the same place — rotation just reveals
+            whichever face is currently pointed at the viewer. */}
+        <motion.div
+          className="relative w-full h-full"
+          style={{ transformStyle: "preserve-3d" }}
+          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
         >
-          <motion.div 
-            className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
+          {/* FRONT FACE */}
+          <div
+            className="absolute inset-0 rounded-[24px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden"
             style={{
-              background: `radial-gradient(300px circle at ${spotlightX.get()} ${spotlightY.get()}, rgba(245,242,235,0.03), transparent)`,
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              transform: "rotateY(0deg)",
+              background: "linear-gradient(135deg, rgba(28, 28, 30, 0.45) 0%, rgba(18, 18, 20, 0.7) 100%)",
+              border: "1px solid rgba(255, 255, 255, 0.06)",
+              boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 12px 40px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3)",
             }}
-          />
+          >
+            <div
+              className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
+              style={{
+                background: `radial-gradient(300px circle at ${spotlight.x}% ${spotlight.y}%, rgba(245,242,235,0.03), transparent)`,
+              }}
+            />
 
-          <div className="relative z-10 flex justify-between items-start">
-            <span className="font-sans font-semibold text-[10px] tracking-[0.2em] uppercase text-klyth-cream/40">
-              They gave us
-            </span>
-            <div className="text-klyth-cream/35 bg-klyth-ghost/30 p-2 rounded-xl border border-white/5">
-              {iconGave}
+            <div className="relative z-10 flex justify-between items-start">
+              <span className="font-sans font-semibold text-[10px] tracking-[0.2em] uppercase text-klyth-cream/40">
+                They gave us
+              </span>
+              <div className="text-klyth-cream/35 bg-klyth-ghost/30 p-2 rounded-xl border border-white/5">
+                {iconGave}
+              </div>
+            </div>
+
+            <div className="relative z-10">
+              <p className="text-lg sm:text-xl font-serif text-klyth-cream/80 leading-tight">
+                {gaveUs}
+              </p>
+              <div className="mt-3 flex items-center gap-1.5 text-[10px] text-klyth-cream/30 font-sans tracking-wide">
+                <span>Hover to reveal</span>
+              </div>
             </div>
           </div>
 
-          <div className="relative z-10">
-            <p className="text-lg sm:text-xl font-serif text-klyth-cream/80 leading-tight">
-              {gaveUs}
-            </p>
-            <div className="mt-3 flex items-center gap-1.5 text-[10px] text-klyth-cream/30 font-sans tracking-wide">
-              <span>Hover to reveal</span>
-            </div>
-          </div>
-        </div>
-
-        {/* BACK CARD */}
-        <div
-          className="absolute inset-0 backface-hidden klyth-glass rounded-[24px] p-6 sm:p-8 flex flex-col justify-between border border-klyth-olive/30 overflow-hidden bg-gradient-to-br from-klyth-obsidian to-klyth-olive/5"
-          style={{
-            backfaceVisibility: "hidden",
-            transform: "rotateY(180deg) translateZ(1px)",
-          }}
-        >
-          <motion.div 
-            className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
+          {/* BACK FACE — pre-rotated 180deg so that once the wrapper hits
+              180deg, this face is right-side-up and front-facing. It sits
+              in the exact same inset-0 box as the front face at all times. */}
+          <div
+            className="absolute inset-0 rounded-[24px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden"
             style={{
-              background: `radial-gradient(300px circle at ${spotlightX.get()} ${spotlightY.get()}, rgba(74,93,35,0.1), transparent)`,
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              transform: "rotateY(180deg)",
+              background: "linear-gradient(135deg, rgba(28, 28, 30, 0.45) 0%, rgba(74, 93, 35, 0.15) 100%)",
+              border: "1px solid rgba(74, 93, 35, 0.3)",
+              boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 12px 40px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3)",
             }}
-          />
+          >
+            <div
+              className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"
+              style={{
+                background: `radial-gradient(300px circle at ${spotlight.x}% ${spotlight.y}%, rgba(74,93,35,0.1), transparent)`,
+              }}
+            />
 
-          <div className="relative z-10 flex justify-between items-start">
-            <span className="font-sans font-semibold text-[10px] tracking-[0.2em] uppercase text-klyth-olive/80">
-              We actually needed
-            </span>
-            <div className="text-klyth-olive bg-klyth-olive/10 p-2 rounded-xl border border-klyth-olive/20">
-              {iconNeeded}
+            <div className="relative z-10 flex justify-between items-start">
+              <span className="font-sans font-semibold text-[10px] tracking-[0.2em] uppercase text-klyth-olive/80">
+                We actually needed
+              </span>
+              <div className="text-klyth-olive bg-klyth-olive/10 p-2 rounded-xl border border-klyth-olive/20">
+                {iconNeeded}
+              </div>
+            </div>
+
+            <div className="relative z-10">
+              <p className="text-lg sm:text-xl font-serif font-bold text-klyth-cream leading-tight">
+                {needed}
+              </p>
+              <div className="mt-3 flex items-center gap-1.5 text-[10px] text-klyth-olive/60 font-sans tracking-wide">
+                <span>System active</span>
+              </div>
             </div>
           </div>
-
-          <div className="relative z-10">
-            <p className="text-lg sm:text-xl font-serif font-bold text-klyth-cream leading-tight">
-              {needed}
-            </p>
-            <div className="mt-3 flex items-center gap-1.5 text-[10px] text-klyth-olive/60 font-sans tracking-wide">
-              <span>System active</span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 };
@@ -180,7 +179,7 @@ export default function MissionBrokenReality() {
               The Reality Check
             </span>
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -189,14 +188,8 @@ export default function MissionBrokenReality() {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-semibold leading-tight text-klyth-cream"
           >
             The internet is full of{" "}
-            <span className="text-klyth-gold italic">
-              financial advice
-            </span>
-            . And it is{" "}
-            <span className="text-klyth-cream font-bold">
-              completely broken
-            </span>
-            .
+            <span className="text-klyth-gold italic">financial advice</span>. And it is{" "}
+            <span className="text-klyth-cream font-bold">completely broken</span>.
           </motion.h2>
         </div>
 
@@ -221,7 +214,7 @@ export default function MissionBrokenReality() {
           className="text-center relative max-w-3xl mx-auto py-8 border-y border-klyth-ghost/20"
         >
           <div className="absolute left-1/2 -translate-x-1/2 -top-2.5 px-3 bg-klyth-charcoal text-klyth-gold/50 font-serif italic text-2xl">
-            “
+            "
           </div>
           <p className="text-xl sm:text-2xl md:text-3xl font-serif italic text-klyth-cream/80 leading-tight">
             We are drowning in information, but starving for systems.
