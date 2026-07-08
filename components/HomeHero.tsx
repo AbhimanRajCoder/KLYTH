@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useMotionTemplate, useTransform } from "framer-motion";
 import Link from "next/link";
+import ScrollIndicator from "./ScrollIndicator";
 
 const MagneticButton = ({
   children,
@@ -266,14 +267,9 @@ export default function HomeHero() {
       </motion.div>
 
       {/* Bottom bar — minimal scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 1 }}
-        className="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-start border-t border-klyth-ghost/15 pt-6 font-sans text-[10px] tracking-[0.25em] text-klyth-cream/35 uppercase"
-      >
-        <span className="hover:text-klyth-gold transition-colors duration-300">Scroll to explore</span>
-      </motion.div>
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-center pt-6">
+        <ScrollIndicator align="center" delay={1.4} />
+      </div>
     </section>
   );
 }

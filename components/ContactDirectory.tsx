@@ -39,7 +39,7 @@ const CopyEmailRow = ({ title, email }: { title: string, email: string }) => {
 
 export default function ContactDirectory() {
   return (
-    <div className="w-full flex flex-col gap-20 pl-0 md:pl-12 lg:pl-16 relative z-10 pt-4 md:pt-12">
+    <div className="w-full flex flex-col gap-20 pl-0 md:pl-12 lg:pl-16 relative z-10">
       
       {/* Routing Options */}
       <div>

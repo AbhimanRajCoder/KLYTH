@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import ScrollIndicator from "../ScrollIndicator";
 
 const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -40,6 +41,9 @@ export default function EcosystemHero() {
         </motion.p>
       </motion.div>
 
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+        <ScrollIndicator align="center" delay={1.5} />
+      </div>
     </section>
   );
 }

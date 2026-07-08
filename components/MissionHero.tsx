@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import ScrollIndicator from "./ScrollIndicator";
 
 export default function MissionHero() {
   const headline = "The system taught us how to work for money, but not how money works.";
@@ -111,34 +112,9 @@ export default function MissionHero() {
           </motion.p>
         </div>
 
-        <motion.div
-          className="mt-10 flex flex-col items-start gap-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] text-klyth-cream/35 font-sans tracking-[0.2em] uppercase font-semibold">
-              Scroll to explore
-            </span>
-            <span className="w-1 h-1 rounded-full bg-klyth-gold/70" />
-          </div>
-          
-          <div className="relative w-[1px] h-8 bg-klyth-ghost overflow-hidden">
-            <motion.div
-              className="absolute top-0 left-0 w-full bg-gradient-to-b from-klyth-gold to-klyth-olive"
-              style={{ height: "100%" }}
-              animate={{
-                y: ["-100%", "100%"],
-              }}
-              transition={{
-                duration: 2.2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </div>
-        </motion.div>
+        <div className="w-full flex justify-center mt-10 md:mt-16">
+          <ScrollIndicator align="center" delay={1.2} />
+        </div>
       </div>
     </section>
   );
