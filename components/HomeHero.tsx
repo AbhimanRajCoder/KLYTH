@@ -84,9 +84,9 @@ const MagneticButton = ({
 
 export default function HomeHero() {
   const headlineParts = [
-    { text: "Financial", color: "text-klyth-cream font-serif font-bold" },
-    { text: "Growth,", color: "text-klyth-cream font-serif font-bold" },
-    { text: "Rewired.", color: "text-klyth-gold font-serif font-bold italic" },
+    { text: "Financial", color: "text-klyth-cream font-serif font-light tracking-tight" },
+    { text: "Growth,", color: "text-transparent bg-clip-text bg-gradient-to-br from-klyth-olive to-[#8a9f60] font-serif font-bold" },
+    { text: "Rewired.", color: "text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-[#f9e9c9] font-serif font-bold italic pr-2" },
   ];
 
   const [isHoveringSection, setIsHoveringSection] = useState(false);
@@ -259,7 +259,7 @@ export default function HomeHero() {
 
             {/* CTA */}
             <motion.div variants={fadeUpVariants} className="shrink-0 md:pt-1">
-              <MagneticButton href="/join">Step Into the Ecosystem</MagneticButton>
+              <MagneticButton href="/join">Inside the Ecosystem</MagneticButton>
             </motion.div>
           </div>
         </div>

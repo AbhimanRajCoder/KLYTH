@@ -21,10 +21,13 @@ export default function EcosystemHero() {
           initial={{ opacity: 0, filter: "blur(20px)", scale: 0.95 }}
           animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
           transition={{ duration: 1.4, ease: premiumEase }}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8 text-klyth-cream tracking-tight"
+          className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8 tracking-tight"
         >
-          Financial Growth, Rewired. <br className="hidden md:block" />
-          <span className="italic font-light text-klyth-cream/80">Inside the Ecosystem.</span>
+          <span className="text-klyth-cream font-light">Financial </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-klyth-olive to-[#8a9f60]">Growth, </span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-[#f9e9c9] italic pr-2">Rewired.</span>
+          <br className="hidden md:block" />
+          <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-klyth-cream to-klyth-cream/50">Inside the Ecosystem.</span>
         </motion.h1>
 
         <motion.p 
@@ -33,26 +36,10 @@ export default function EcosystemHero() {
           transition={{ duration: 1.2, delay: 0.5, ease: premiumEase }}
           className="font-sans text-lg md:text-xl lg:text-2xl text-klyth-cream/50 max-w-3xl leading-relaxed font-light"
         >
-          We are not building just another course you will buy and abandon. We are building a comprehensive cultural layer—fusing behavioral technology, real-world action, and peer accountability to make financial growth a daily, automatic habit.
+          We are not building just another course you will buy and abandon. We are building a comprehensive cultural layer fusing behavioral technology, real-world action, and peer accountability to make financial growth a daily, automatic habit.
         </motion.p>
       </motion.div>
 
-      {/* Scroll indicator - elegant pill shape */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5, ease: premiumEase }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-20"
-      >
-        <div className="w-[1px] h-16 bg-gradient-to-b from-klyth-gold/50 to-transparent overflow-hidden relative">
-           <motion.div 
-             className="w-full h-full bg-klyth-cream"
-             initial={{ y: "-100%" }}
-             animate={{ y: "100%" }}
-             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-           />
-        </div>
-      </motion.div>
     </section>
   );
 }
