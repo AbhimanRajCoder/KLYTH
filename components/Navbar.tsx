@@ -40,6 +40,8 @@ export default function Navbar() {
     { name: "The Ecosystem", href: "/ecosystem" },
     { name: "Events", href: "/events" },
     { name: "The Mission", href: "/mission" },
+    { name: "About", href: "/about" },
+    { name: "FAQ", href: "/faq" },
   ];
 
   return (

@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { submitNextChapterSubscription } from "@/app/actions/subscribe";
 import { toast } from "sonner";
 
 export default function FinalCTA() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,25 +47,54 @@ export default function FinalCTA() {
   } as const;
 
   return (
-    <section className="relative w-full bg-transparent py-16 sm:py-24 px-6 sm:px-12 lg:px-20 select-none overflow-hidden flex flex-col items-center justify-center">
-      {/* Decorative ambient ecosystem portal glows */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        {/* Soft centered light representing entering the ecosystem */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80vw] h-[40vw] rounded-full bg-gradient-to-t from-klyth-gold/6 via-klyth-olive/3 to-transparent blur-[160px]" />
-        
-        {/* Fine vertical centerline */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-32 bg-gradient-to-b from-klyth-ghost/45 to-transparent" />
+    <section className="relative w-full h-[60vh] min-h-[550px] flex items-center justify-center px-6 bg-black z-10 overflow-hidden select-none">
+      
+      {/* Film Grain Texture */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.025] bg-[url('data:image/svg+xml,%3Csvg viewBox=\'0 0 250 250\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E')] z-[4]" />
+
+      {/* Ambient Vignette Overlay - Fades to pure black */}
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_25%,#000000_95%)] z-[3]" />
+
+      {/* Premium Ambient Lighting Gradient Orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
+        <motion.div
+          animate={shouldReduceMotion ? {} : {
+            x: [0, 20, -15, 0],
+            y: [0, -15, 20, 0],
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-klyth-olive/8 blur-[130px] rounded-full"
+        />
+        <motion.div
+          animate={shouldReduceMotion ? {} : {
+            x: [0, -25, 15, 0],
+            y: [0, 20, -20, 0],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[-10%] right-[15%] w-[450px] h-[450px] bg-klyth-gold/6 blur-[120px] rounded-full"
+        />
+        <motion.div
+          animate={shouldReduceMotion ? {} : {
+            x: [0, 10, -10, 0],
+            y: [0, 15, -15, 0],
+          }}
+          transition={{ duration: 35, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[30%] left-[45%] -translate-x-1/2 w-[400px] h-[400px] bg-klyth-cream/4 blur-[100px] rounded-full"
+        />
       </div>
+
+      {/* Subtle Central Headline Backlight Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-klyth-gold/[0.04] blur-[160px] rounded-full pointer-events-none z-[2]" />
 
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-10%" }}
         variants={containerVariants}
-        className="relative z-10 max-w-4xl w-full flex flex-col items-center text-center gap-12 sm:gap-16 select-text"
+        className="relative z-10 max-w-4xl w-full flex flex-col items-center text-center gap-8 select-text"
       >
         {/* Content stack */}
-        <div className="flex flex-col items-center gap-6 sm:gap-8 max-w-3xl">
+        <div className="flex flex-col items-center gap-4 max-w-3xl">
           {/* Eyebrow */}
           <motion.span
             variants={fadeUpVariants}
@@ -76,15 +106,18 @@ export default function FinalCTA() {
           {/* Headline */}
           <motion.h2
             variants={fadeUpVariants}
-            className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-klyth-cream leading-[1.08] tracking-tight"
+            className="font-serif text-4xl md:text-6xl lg:text-7xl text-klyth-cream leading-tight tracking-tight"
           >
-            Stop surviving.<br /><span className="text-klyth-gold italic">Start scaling.</span>
+            Stop surviving.<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-klyth-cream italic font-bold">
+              Start scaling.
+            </span>
           </motion.h2>
 
           {/* Body description */}
           <motion.p
             variants={fadeUpVariants}
-            className="font-sans font-normal text-base sm:text-lg md:text-xl text-klyth-cream/70 leading-relaxed max-w-2xl mt-2"
+            className="font-sans text-base md:text-lg text-klyth-cream/50 max-w-xl mx-auto leading-relaxed font-light mt-2"
           >
             The era of one-size-fits-all financial anxiety is over. Join the movement
             to unlock priority beta access, exclusive workshop invites, and the
@@ -93,7 +126,7 @@ export default function FinalCTA() {
         </div>
 
         {/* Minimalist Input Capture Portal */}
-        <motion.div variants={fadeUpVariants} className="w-full max-w-xl mx-auto min-h-[80px]">
+        <motion.div variants={fadeUpVariants} className="w-full max-w-xl mx-auto min-h-[80px] mb-4">
           <motion.form
             onSubmit={handleSubmit}
             className="flex flex-col sm:flex-row gap-4 w-full mt-4"
@@ -123,7 +156,9 @@ export default function FinalCTA() {
                     <span className="absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] transition-transform duration-1000 group-hover:translate-x-[260%]" />
                   </span>
                   <span className="relative z-10">Unlock Access</span>
-                  <i className="fa-solid fa-arrow-right text-[10px] transition-transform duration-300 group-hover:translate-x-1.5 relative z-10" />
+                  <svg className="w-3.5 h-3.5 text-klyth-cream transition-transform duration-300 group-hover:translate-x-1.5 relative z-10" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                  </svg>
                 </>
               )}
             </button>

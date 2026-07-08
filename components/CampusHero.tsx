@@ -22,7 +22,7 @@ export default function CampusHero() {
   }, []);
 
   return (
-    <section className="relative w-full h-[70vh] min-h-[50vh] flex flex-col justify-center items-center text-center px-6 overflow-hidden z-10 bg-klyth-charcoal">
+    <section className="relative w-full h-[60vh] min-h-[450px] flex flex-col justify-center items-center text-center px-6 overflow-hidden z-10 bg-klyth-charcoal">
       
       {/* Background Visual: Abstract Node Network */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.15]">
@@ -81,7 +81,7 @@ export default function CampusHero() {
             transition={{ duration: 1.2, ease: premiumEase }}
             className="relative font-serif text-4xl md:text-5xl lg:text-7xl font-bold leading-tight text-klyth-cream"
           >
-            Bring Klyth to Your Campus.
+            Bring Klyth to Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-klyth-cream font-bold italic">Campus.</span>
             
             {/* Sweeping Highlight */}
             <motion.div 

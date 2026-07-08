@@ -14,7 +14,7 @@ export default function CampusApply() {
   };
 
   return (
-    <section className="relative w-full py-40 px-6 z-10 flex justify-center">
+    <section className="relative w-full py-24 px-6 z-10 flex justify-center">
       
       {/* Background Soft Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-klyth-olive/5 blur-[150px] rounded-full pointer-events-none"></div>
@@ -30,14 +30,17 @@ export default function CampusApply() {
         <div className="absolute inset-0 bg-gradient-to-br from-klyth-olive/40 via-white/5 to-transparent z-0"></div>
         
         {/* Inner Container */}
-        <div className="relative w-full h-full bg-[#1C1C1E]/90 backdrop-blur-3xl rounded-[calc(3rem-1px)] p-12 md:p-24 text-center flex flex-col items-center shadow-[0_40px_100px_rgba(0,0,0,0.8)] z-10">
+        <div className="relative w-full h-full bg-[#1C1C1E]/90 backdrop-blur-3xl rounded-[calc(3rem-1px)] p-10 md:p-16 text-center flex flex-col items-center shadow-[0_40px_100px_rgba(0,0,0,0.8)] z-10">
           
           <span className="font-sans font-medium uppercase tracking-[0.3em] text-klyth-olive text-[10px] mb-8">
             The Alpha Phase
           </span>
           
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-klyth-cream mb-8 leading-tight">
-            Don't wait for the official launch. <br className="hidden md:block" /> <span className="italic">Claim your campus today.</span>
+            Don't wait for the official launch. <br className="hidden md:block" />{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-klyth-cream italic font-bold">
+              Claim your campus today.
+            </span>
           </h2>
           
           <p className="font-sans text-lg md:text-xl text-klyth-cream/60 max-w-2xl mx-auto mb-16 leading-relaxed font-light">

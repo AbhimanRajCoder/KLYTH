@@ -1,50 +1,99 @@
 "use client";
+
+import React from "react";
 import { motion } from "framer-motion";
+import ScrollIndicator from "./ScrollIndicator";
 
 const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export default function AboutHero() {
+  const headline = "Built by the generation we are solving for.";
+  const words = headline.split(" ");
+
   return (
-    <section className="relative w-full h-[65vh] min-h-[500px] flex flex-col justify-center items-center text-center px-6 overflow-hidden z-10 bg-klyth-charcoal">
-      
-      {/* Background Visual: Interlocking Geometric Lines */}
-      <div className="absolute inset-0 pointer-events-none flex justify-center items-center opacity-10">
-        <svg viewBox="0 0 100 100" className="w-[120%] h-[120%] stroke-klyth-ghost stroke-[0.2]" fill="none">
-          <motion.path 
-            initial={{ pathLength: 0 }} 
-            animate={{ pathLength: 1 }} 
-            transition={{ duration: 3, ease: premiumEase }}
-            d="M 20 80 L 40 20 L 60 80 L 80 20" 
+    <section className="relative w-full min-h-[80vh] flex items-center bg-klyth-charcoal px-6 sm:px-12 py-16 sm:py-20 overflow-hidden select-none z-10">
+      {/* Subtle Atmospheric Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#121212_95%)] z-10" />
+        <div 
+          className="absolute inset-0 opacity-[0.02] z-[2]" 
+          style={{
+            backgroundImage: `radial-gradient(var(--klyth-cream) 1px, transparent 1px)`,
+            backgroundSize: '48px 48px'
+          }}
+        />
+
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center scale-105 z-[1]"
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.05, 0.98, 1],
+              x: [0, 20, -10, 0],
+              y: [0, -15, 20, 0],
+              rotate: [0, 2, -2, 0],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-klyth-olive/10 blur-[120px]"
           />
-          <motion.path 
-            initial={{ pathLength: 0 }} 
-            animate={{ pathLength: 1 }} 
-            transition={{ duration: 3, delay: 0.5, ease: premiumEase }}
-            d="M 10 50 L 90 50" 
+          <motion.div
+            animate={{
+              scale: [1, 0.97, 1.03, 1],
+              x: [0, -20, 10, 0],
+              y: [0, 25, -15, 0],
+              rotate: [0, -2, 2, 0],
+            }}
+            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-1/4 right-1/4 w-[330px] h-[330px] rounded-full bg-klyth-gold/5 blur-[110px]"
           />
-          <motion.path 
-            initial={{ pathLength: 0 }} 
-            animate={{ pathLength: 1 }} 
-            transition={{ duration: 3, delay: 1, ease: premiumEase }}
-            d="M 50 10 L 50 90" 
-          />
-        </svg>
+        </motion.div>
       </div>
 
-      {/* Main Content */}
-      <motion.div
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease: premiumEase }}
-        className="max-w-4xl mx-auto flex flex-col items-center relative z-10"
-      >
-        <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-8 text-klyth-cream">
-          Built by the generation we are solving for.
-        </h1>
-        <p className="font-sans text-lg md:text-xl text-klyth-cream/50 max-w-[65ch] leading-relaxed font-light">
-          We aren't Wall Street executives or traditional bankers. We are a team of technologists, designers, and builders who experienced the exact same financial anxiety you did—and decided to engineer a way out of it.
-        </p>
-      </motion.div>
+      <div className="relative z-20 max-w-7xl mx-auto w-full pt-20 md:pt-32 flex flex-col items-center justify-center text-center">
+        <div className="max-w-5xl flex flex-col items-center">
+          <motion.div
+            className="flex flex-wrap justify-center gap-x-3 gap-y-1 sm:gap-y-2"
+          >
+            {words.map((word, idx) => {
+              const cleanWord = word.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+              const isHighlight = ["generation", "solving", "for"].includes(cleanWord);
+              return (
+                <div key={idx} className="py-1.5 inline-block">
+                  <motion.span
+                    className={`inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-semibold tracking-tight leading-[1.2] ${
+                      isHighlight
+                        ? "text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-klyth-cream font-bold italic"
+                        : "text-klyth-cream"
+                    }`}
+                    initial={{ y: 15, opacity: 0, filter: "blur(4px)" }}
+                    animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                    transition={{
+                      y: { duration: 0.8, delay: idx * 0.035, ease: premiumEase },
+                      opacity: { duration: 0.8, delay: idx * 0.035 },
+                      filter: { duration: 0.8, delay: idx * 0.035 }
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                </div>
+              );
+            })}
+          </motion.div>
+
+          <motion.p
+            className="mt-10 text-base sm:text-lg text-klyth-cream/65 font-sans max-w-3xl leading-relaxed font-light text-center px-4"
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8, duration: 0.8, ease: premiumEase }}
+          >
+            We aren&apos;t Wall Street executives or traditional bankers. We are a team of technologists, designers, and builders who experienced the exact same financial anxiety you did—and decided to engineer a way out of it.
+          </motion.p>
+        </div>
+
+        <div className="w-full flex justify-center mt-16 md:mt-24">
+          <ScrollIndicator align="center" delay={1.2} />
+        </div>
+      </div>
     </section>
   );
 }

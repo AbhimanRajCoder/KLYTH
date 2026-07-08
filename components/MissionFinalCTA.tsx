@@ -1,16 +1,19 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+
+const premiumEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export default function MissionFinalCTA() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
+  // Magnetic Button Physics
   const mX = useMotionValue(0);
   const mY = useMotionValue(0);
-
   const springConfig = { damping: 15, stiffness: 120, mass: 0.6 };
   const smoothMX = useSpring(mX, springConfig);
   const smoothMY = useSpring(mY, springConfig);
@@ -40,90 +43,75 @@ export default function MissionFinalCTA() {
     mY.set(0);
   };
 
-  const [particles, setParticles] = useState<{ x: number; y: number; delay: number; scale: number }[]>([]);
-
-  useEffect(() => {
-    const generated = Array.from({ length: 12 }).map(() => ({
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      delay: Math.random() * 5,
-      scale: Math.random() * 0.5 + 0.3,
-    }));
-    setParticles(generated);
-  }, []);
-
   return (
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full bg-klyth-charcoal text-klyth-cream py-20 sm:py-28 px-6 sm:px-12 overflow-hidden flex items-center justify-center min-h-[50vh]"
+      className="relative w-full h-[60vh] min-h-[550px] flex items-center justify-center px-6 bg-black z-10 overflow-hidden select-none"
     >
-      {/* 1. Cinematic Background & Particles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          animate={{
-            scale: [1, 1.05, 1],
-            opacity: [0.08, 0.12, 0.08],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 rounded-full bg-klyth-olive/10 blur-[120px]"
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/3 rounded-full bg-klyth-gold/5 blur-[80px]" />
+      {/* Film Grain Texture */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.025] bg-[url('data:image/svg+xml,%3Csvg viewBox=\'0 0 250 250\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E')] z-[4]" />
 
-        {/* Particles */}
-        {particles.map((p, idx) => (
-          <motion.div
-            key={idx}
-            className="absolute w-1 h-1 rounded-full bg-klyth-cream/15 pointer-events-none"
-            style={{
-              left: `${p.x}%`,
-              top: `${p.y}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, 15, 0],
-              opacity: [0, 0.4, 0],
-              scale: [p.scale, p.scale * 1.2, p.scale],
-            }}
-            transition={{
-              duration: 8 + p.delay,
-              repeat: Infinity,
-              delay: p.delay,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
+      {/* Ambient Vignette Overlay - Fades to pure black */}
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_25%,#000000_95%)] z-[3]" />
+
+      {/* Premium Ambient Lighting Gradient Orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
+        <motion.div
+          animate={shouldReduceMotion ? {} : {
+            x: [0, 20, -15, 0],
+            y: [0, -15, 20, 0],
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-klyth-olive/8 blur-[130px] rounded-full"
+        />
+        <motion.div
+          animate={shouldReduceMotion ? {} : {
+            x: [0, -25, 15, 0],
+            y: [0, 20, -20, 0],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[-10%] right-[15%] w-[450px] h-[450px] bg-klyth-gold/6 blur-[120px] rounded-full"
+        />
+        <motion.div
+          animate={shouldReduceMotion ? {} : {
+            x: [0, 10, -10, 0],
+            y: [0, 15, -15, 0],
+          }}
+          transition={{ duration: 35, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[30%] left-[45%] -translate-x-1/2 w-[400px] h-[400px] bg-klyth-cream/4 blur-[100px] rounded-full"
+        />
       </div>
-      
-      {/* 2. Interactive Climax CTA Box */}
+
+      {/* Subtle Central Headline Backlight Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-klyth-gold/[0.04] blur-[160px] rounded-full pointer-events-none z-[2]" />
+
+      {/* Foreground Content */}
       <motion.div
-        initial={{ opacity: 0, y: 30, scale: 0.96 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 max-w-4xl mx-auto text-center"
+        initial={{ opacity: 0, scale: 0.98, y: 20 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 1.5, ease: premiumEase }}
+        className="relative max-w-3xl w-full text-center flex flex-col items-center z-[10] select-text"
       >
         <span className="font-sans font-semibold text-xs tracking-[0.25em] uppercase text-klyth-gold/60 mb-4 inline-block">
           The Next Step
         </span>
-        
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-semibold leading-tight mb-6 text-klyth-cream">
-          Enough theory.<br />Let&apos;s{" "}
-          <span className="text-klyth-gold font-bold italic">
+
+        <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-klyth-cream mb-6 leading-tight tracking-tight">
+          Enough theory. <br className="hidden md:block" />{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-klyth-cream italic font-bold">
             build the system
           </span>
           .
         </h2>
         
-        <p className="text-base sm:text-lg text-klyth-cream/70 font-sans max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+        <p className="font-sans text-base md:text-lg text-klyth-cream/50 max-w-xl mx-auto mb-10 leading-relaxed font-light">
           We know exactly why the system is broken. Now, step inside and see exactly how we are fixing it.
         </p>
 
+        {/* Minimalist Apple-like Magnetic Button */}
         <div className="inline-block relative">
           <Link href="/ecosystem">
             <motion.button
@@ -132,7 +120,7 @@ export default function MissionFinalCTA() {
                 x: smoothMX,
                 y: smoothMY,
               }}
-              className="relative inline-flex items-center gap-4 px-10 py-5 bg-klyth-olive text-klyth-cream font-sans font-semibold text-base rounded-full border border-klyth-olive/40 overflow-hidden shadow-[0_8px_25px_rgba(74,93,35,0.15)] hover:shadow-[0_15px_40px_rgba(74,93,35,0.3)] transition-shadow duration-300"
+              className="relative inline-flex items-center gap-4 px-10 py-5 bg-klyth-olive text-klyth-cream font-sans font-semibold text-base rounded-full border border-klyth-olive/40 overflow-hidden shadow-[0_8px_25px_rgba(74,93,35,0.15)] hover:shadow-[0_15px_40px_rgba(74,93,35,0.3)] transition-all duration-300"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -140,7 +128,7 @@ export default function MissionFinalCTA() {
               
               <motion.span
                 className="relative z-10 inline-block"
-                animate={{
+                animate={shouldReduceMotion ? {} : {
                   x: [0, 3, 0]
                 }}
                 transition={{
@@ -149,7 +137,9 @@ export default function MissionFinalCTA() {
                   ease: "easeInOut"
                 }}
               >
-                <i className="fa-solid fa-arrow-right text-sm" />
+                <svg className="w-3.5 h-3.5 text-klyth-cream" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                </svg>
               </motion.span>
             </motion.button>
           </Link>

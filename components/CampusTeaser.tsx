@@ -20,7 +20,7 @@ export default function CampusTeaser() {
   ];
 
   return (
-    <section className="relative w-full py-40 px-6 z-10 flex flex-col items-center">
+    <section className="relative w-full py-24 px-6 z-10 flex flex-col items-center">
       
       {/* Intro Text */}
       <div className="max-w-[70ch] w-full text-center flex flex-col items-center mb-24">
@@ -28,7 +28,7 @@ export default function CampusTeaser() {
           Under Construction
         </span>
         <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 text-klyth-cream leading-tight">
-          We are designing the ultimate student leadership experience.
+          We are designing the <span className="text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-klyth-cream italic font-bold">ultimate student leadership</span> experience.
         </h2>
         <p className="font-sans text-klyth-cream/50 text-lg leading-relaxed font-light mb-12">
           We are currently finalizing the blueprint for the official Klyth Ambassador Program. We aren't just looking for promoters—we are looking for visionaries who want to bring real financial infrastructure to their peers. We are putting together a program that rewards execution and builds your career.
