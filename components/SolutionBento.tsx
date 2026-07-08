@@ -129,15 +129,15 @@ export default function SolutionBento() {
 
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col">
         {/* Header Block */}
-        <div className="flex flex-col gap-5 max-w-3xl mb-16 sm:mb-24 select-text">
+        <div className="flex flex-col gap-5 max-w-4xl mb-16 sm:mb-24 mx-auto text-center items-center select-text">
           <span className="font-sans font-bold text-xs tracking-[0.2em] uppercase text-klyth-gold">
             The Klyth Way
           </span>
-          <h2 className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-klyth-cream leading-tight">
+          <h2 className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-klyth-cream leading-tight max-w-3xl">
             Financial growth is not a course. It is a <span className="text-klyth-gold italic">daily habit.</span>
           </h2>
-          <p className="font-sans font-normal text-lg sm:text-xl text-klyth-cream/70 mt-2">
-            We aren't just teaching finance. We are building the infrastructure for financially intelligent living.
+          <p className="font-sans font-normal text-lg sm:text-xl text-klyth-cream/70 mt-2 max-w-2xl">
+            We aren&apos;t just teaching finance. We are building the infrastructure for financially intelligent living.
           </p>
         </div>
 

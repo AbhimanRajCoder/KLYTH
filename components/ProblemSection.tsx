@@ -44,7 +44,7 @@ const ProblemItem = ({ number, title, body }: ProblemItemProps) => {
       <motion.div variants={contentVariants} className="flex flex-col gap-5 select-text">
         <div className="flex items-center gap-3">
           <span className="bg-klyth-olive/15 border border-klyth-olive/35 text-klyth-olive font-sans font-semibold text-[10px] tracking-[0.25em] px-2.5 py-1 rounded uppercase">
-            CHAPTER 0{number}
+            PROBLEM 0{number}
           </span>
         </div>
         <h3 className="font-serif font-bold text-3xl sm:text-4xl text-klyth-cream leading-tight tracking-tight max-w-xl">
@@ -72,17 +72,22 @@ export default function ProblemSection() {
     {
       number: "1",
       title: "The \"One-Size-Fits-All\" Trap",
-      body: "YouTube channels, textbook lessons, and standard online courses offer flat, generic blueprints. They assume every student has the same capital, background, and goals. The result? Zero personalization and absolute engagement failure.",
+      body: "Generic blueprints assume everyone starts from the same baseline. Mass-market advice shatters the second it meets your real life, income, and background. Zero personalization guarantees zero progress.",
     },
     {
       number: "2",
-      title: "The AI Chatbot Illusion",
-      body: "Modern AI chatbots deliver endless lists of generic textbook facts. But listicle definitions don't equate to structure, a reliable roadmap, or genuine progress. You don't need more raw data—you need execution.",
+      title: "The Friction of Static Learning",
+      body: "Static video courses and textbooks dump passive theory on you without an execution plan. This high-friction approach breeds overwhelm, massive drop-off rates, and total engagement failure.",
     },
     {
       number: "3",
       title: "The Finfluencer Echo Chamber",
-      body: "Viral social content is optimized for clicks, sensations, and affiliate sign-ups, not for the long-term health of your portfolio. Following hype-driven trends leaves you reacting to noise rather than building systems.",
+      body: "Viral creators push hype-driven, generalized advice engineered for algorithms, not your portfolio. What works for a wealthy creator almost never applies to someone building a foundation from scratch.",
+    },
+    {
+      number: "4",
+      title: "The AI Chatbot Illusion",
+      body: "Chatbots deliver isolated facts, not a personalized roadmap. Because they lack the context of your actual life and offer zero hand-holding, you're left to execute complex financial decisions entirely alone.",
     },
   ];
 
@@ -114,7 +119,7 @@ export default function ProblemSection() {
                 You spent years in classrooms memorizing equations that had no relevance to your life, and were then expected to make life-altering financial decisions completely in the dark.
               </p>
               <p>
-                But the deepest flaw isn't just the lack of education—it is the lack of context. Most financial advisors and platforms speak a dialect from a bygone era.
+                But the deepest flaw isn&apos;t just the lack of early education—it is the broken tools we are given to fix it. Yet, the modern internet treats your life like a generic statistic.
               </p>
             </div>
           </motion.div>
@@ -134,7 +139,7 @@ export default function ProblemSection() {
       </div>
 
       {/* Full Width Centered Quote */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto mt-24 sm:mt-32 pt-12 flex justify-center text-center">
+      <div className="relative z-10 w-full max-w-4xl mx-auto mt-16 sm:mt-24 pt-8 flex justify-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -142,11 +147,12 @@ export default function ProblemSection() {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-2xl sm:text-3xl lg:text-4xl font-bold select-text relative"
         >
-          <span className="text-klyth-gold font-serif italic pr-1 sm:pr-2 opacity-50">"</span>
-          <span className="text-klyth-cream font-serif tracking-wide italic">
-            Personal finance is <span className="text-klyth-gold font-medium">deeply personal</span>.
+          <span className="text-klyth-cream font-serif tracking-wide italic leading-relaxed max-w-3xl block mx-auto">
+            We are expected to navigate life&apos;s <span className="text-klyth-gold font-semibold">most stressful subject</span> using tools that <span className="text-klyth-cream/60">don&apos;t actually know us.</span> <br className="hidden sm:block" />{" "}
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-klyth-cream font-bold not-italic mt-2">
+              It&apos;s time to rewire the system.
+            </span>
           </span>
-          <span className="text-klyth-gold font-serif italic pl-1 sm:pl-2 opacity-50">"</span>
 
           {/* Underline mask animation */}
           <motion.div
