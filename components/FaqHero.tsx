@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function FaqHero() {
   return (
-    <section className="relative w-full h-[40vh] min-h-[350px] flex flex-col justify-center items-center text-center px-6 pt-24 pb-12 z-10">
+    <section className="relative w-full flex flex-col justify-center items-center text-center px-6 z-10 pt-28 pb-16 md:pt-36 md:pb-20">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

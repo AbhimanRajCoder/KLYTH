@@ -140,7 +140,7 @@ export default function FaqAccordion() {
   };
 
   return (
-    <section className="relative w-full py-20 md:py-32 px-4 md:px-6 z-10 flex flex-col items-center">
+    <section className="relative w-full py-12 md:py-16 px-4 md:px-6 z-10 flex flex-col items-center">
       <div className="w-full max-w-[780px] flex flex-col items-center text-center mb-16 md:mb-20">
         <span className="font-sans font-medium uppercase tracking-[0.2em] text-klyth-olive text-xs mb-4">
           The Details
