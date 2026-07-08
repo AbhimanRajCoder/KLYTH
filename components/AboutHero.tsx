@@ -11,7 +11,7 @@ export default function AboutHero() {
   const words = headline.split(" ");
 
   return (
-    <section className="relative w-full min-h-[80vh] flex items-center bg-klyth-charcoal px-6 sm:px-12 py-16 sm:py-20 overflow-hidden select-none z-10">
+    <section className="relative w-full min-h-[100vh] flex items-center bg-klyth-charcoal px-6 sm:px-12 py-16 sm:py-20 overflow-hidden select-none z-10">
       {/* Subtle Atmospheric Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#121212_95%)] z-10" />

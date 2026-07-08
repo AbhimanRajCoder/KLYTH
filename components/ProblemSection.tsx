@@ -147,12 +147,11 @@ export default function ProblemSection() {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="text-2xl sm:text-3xl lg:text-4xl font-bold select-text relative"
         >
-          <span className="text-klyth-cream font-serif tracking-wide italic leading-relaxed max-w-3xl block mx-auto">
-            We are expected to navigate life&apos;s <span className="text-klyth-gold font-semibold">most stressful subject</span> using tools that <span className="text-klyth-cream/60">don&apos;t actually know us.</span> <br className="hidden sm:block" />{" "}
-            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-klyth-cream font-bold not-italic mt-2">
-              It&apos;s time to rewire the system.
-            </span>
+          <span className="text-klyth-gold font-serif italic pr-1 sm:pr-2 opacity-50">"</span>
+          <span className="text-klyth-cream font-serif tracking-wide italic">
+            Personal finance is <span className="text-klyth-gold font-medium">deeply personal</span>.
           </span>
+          <span className="text-klyth-gold font-serif italic pl-1 sm:pl-2 opacity-50">"</span>
 
           {/* Underline mask animation */}
           <motion.div
