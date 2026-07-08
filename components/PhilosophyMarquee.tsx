@@ -23,7 +23,7 @@ const repeatedItems = [...philosophyItems, ...philosophyItems];
 
 export default function PhilosophyMarquee() {
   return (
-    <div className="relative w-full h-14 md:h-[72px] bg-klyth-gold/60 border-y border-klyth-gold/20 overflow-hidden flex items-center group transition-colors duration-500 hover:bg-[#526727] cursor-default select-none z-10">
+    <div className="relative w-full h-14 md:h-[72px] bg-[#c8f04e] border-y border-klyth-gold/20 overflow-hidden flex items-center group transition-colors duration-500 cursor-default select-none z-10">
       
       {/* Ultra-light noise texture for premium depth */}
       <div 
@@ -36,11 +36,11 @@ export default function PhilosophyMarquee() {
         <ul className="flex items-center animate-infinite-scroll group-hover:[animation-play-state:paused] will-change-transform">
           {repeatedItems.map((text, idx) => (
             <li key={idx} className="flex items-center whitespace-nowrap">
-              <span className="font-sans font-semibold uppercase tracking-[0.15em] md:tracking-[0.2em] text-klyth-cream/85 text-xs md:text-sm transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]">
+              <span className="font-sans font-semibold uppercase tracking-[0.15em] md:tracking-[0.2em] text-black text-xs md:text-sm transition-all duration-500 group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]">
                 {text}
               </span>
               {/* Elegant separator */}
-              <span className="mx-6 md:mx-10 text-klyth-ghost text-[10px] md:text-xs">✦</span>
+              <span className="mx-6 md:mx-10 text-black text-[10px] md:text-xs">✦</span>
             </li>
           ))}
         </ul>
