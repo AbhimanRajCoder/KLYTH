@@ -39,43 +39,8 @@ const CopyEmailRow = ({ title, email }: { title: string, email: string }) => {
 
 export default function ContactDirectory() {
   return (
-    <div className="w-full flex flex-col gap-20 pl-0 md:pl-12 lg:pl-16 relative z-10">
+    <div className="w-full flex flex-col gap-12 pl-0 md:pl-12 lg:pl-16 relative z-10">
       
-      {/* Routing Options */}
-      <div>
-        <span className="font-sans font-medium uppercase tracking-[0.2em] text-klyth-olive text-[10px] mb-4 block">
-          Direct Routing
-        </span>
-        <h3 className="font-serif text-3xl text-klyth-cream mb-8">
-          Skip the queue. Reach the right desk.
-        </h3>
-        <div className="flex flex-col">
-          <CopyEmailRow title="Support & General Queries" email="hello@klyth.in" />
-          <CopyEmailRow title="Partnerships & Creators" email="partnerships@klyth.in" />
-          <CopyEmailRow title="Press & Media" email="founders@klyth.in" />
-          <CopyEmailRow title="Careers" email="careers@klyth.in" />
-          <CopyEmailRow title="Legal" email="legal@klyth.in" />
-        </div>
-      </div>
-
-      {/* Headquarters */}
-      <div>
-        <span className="font-sans font-medium uppercase tracking-[0.2em] text-klyth-olive text-[10px] mb-4 block">
-          Headquarters
-        </span>
-        <div className="bg-[#1C1C1E]/30 border border-white/5 rounded-2xl p-6 flex items-start gap-4 backdrop-blur-sm">
-          <svg className="w-5 h-5 text-klyth-olive mt-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
-          </svg>
-          <div>
-            <p className="font-sans text-base text-klyth-cream/80 leading-relaxed">
-              Lohegaon, Pune - 411047<br />India
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* The Community */}
       <div>
         <span className="font-sans font-medium uppercase tracking-[0.2em] text-klyth-olive text-[10px] mb-4 block">
@@ -102,6 +67,41 @@ export default function ContactDirectory() {
               <circle cx="4" cy="4" r="2"></circle>
             </svg>
           </Link>
+        </div>
+      </div>
+
+      {/* Headquarters */}
+      <div>
+        <span className="font-sans font-medium uppercase tracking-[0.2em] text-klyth-olive text-[10px] mb-4 block">
+          Headquarters
+        </span>
+        <div className="bg-[#1C1C1E]/30 border border-white/5 rounded-2xl p-6 flex items-start gap-4 backdrop-blur-sm">
+          <svg className="w-5 h-5 text-klyth-olive mt-1 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <div>
+            <p className="font-sans text-base text-klyth-cream/80 leading-relaxed">
+              Lohegaon, Pune - 411047<br />India
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Routing Options */}
+      <div>
+        <span className="font-sans font-medium uppercase tracking-[0.2em] text-klyth-olive text-[10px] mb-4 block">
+          Direct Routing
+        </span>
+        <h3 className="font-serif text-3xl text-klyth-cream mb-8">
+          Skip the queue. Reach the right desk.
+        </h3>
+        <div className="flex flex-col">
+          <CopyEmailRow title="Support & General Queries" email="hello@klyth.in" />
+          <CopyEmailRow title="Partnerships & Creators" email="partnerships@klyth.in" />
+          <CopyEmailRow title="Press & Media" email="founders@klyth.in" />
+          <CopyEmailRow title="Careers" email="careers@klyth.in" />
+          <CopyEmailRow title="Legal" email="legal@klyth.in" />
         </div>
       </div>
     </div>

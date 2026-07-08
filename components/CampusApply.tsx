@@ -15,7 +15,7 @@ export default function CampusApply() {
   };
 
   return (
-    <section className="relative w-full py-24 px-6 z-10 flex justify-center">
+    <section className="relative w-full min-h-[85vh] py-24 px-6 z-10 flex items-center justify-center">
       
       {/* Premium Ambient Background Glows */}
       <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-klyth-olive/15 blur-[140px] rounded-full pointer-events-none mix-blend-screen"></div>

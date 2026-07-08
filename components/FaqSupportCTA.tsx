@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function FaqSupportCTA() {
   return (
-    <section className="relative w-full py-32 px-4 md:px-6 z-10 flex justify-center mt-8 mb-16">
+    <section className="relative w-full min-h-[85vh] py-32 px-4 md:px-6 z-10 flex items-center justify-center mt-8 mb-16">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
