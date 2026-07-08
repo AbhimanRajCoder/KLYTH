@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import HomeHero from "@/components/HomeHero";
+import PhilosophyMarquee from "@/components/PhilosophyMarquee";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionBento from "@/components/SolutionBento";
 import SocialProof from "@/components/SocialProof";
@@ -71,6 +72,7 @@ export default function Home() {
       {/* Main content wrapping above background */}
       <div className="relative z-10 w-full flex flex-col">
         <HomeHero />
+        <PhilosophyMarquee />
         <ProblemSection />
         <SolutionBento />
         <SocialProof />

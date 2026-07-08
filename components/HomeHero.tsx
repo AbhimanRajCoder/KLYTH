@@ -1,275 +1,146 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useMotionValue, useSpring, useMotionTemplate, useTransform } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import ScrollIndicator from "./ScrollIndicator";
+import LivingGrid from "./LivingGrid";
 
-const MagneticButton = ({
-  children,
-  href,
-}: {
-  children: React.ReactNode;
-  href: string;
- }) => {
-  const buttonRef = useRef<HTMLAnchorElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(true);
-
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 120, mass: 0.2 };
-  const springX = useSpring(x, springConfig);
-  const springY = useSpring(y, springConfig);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    setIsMobile(!mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsMobile(!e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (isMobile || !buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left - width / 2;
-    const mouseY = e.clientY - rect.top - height / 2;
-
-    x.set(mouseX * 0.25);
-    y.set(mouseY * 0.25);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-    setIsHovered(false);
-  };
-
+// Interactive Cards Component
+const NavCard = ({ title, subtitle, delay, href }: { title: string, subtitle: string, delay: number, href: string }) => {
   return (
-    <div className="relative group">
-      {!isMobile && (
-        <motion.div
-          className="absolute -inset-3 rounded-full bg-klyth-gold/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{ x: springX, y: springY }}
-        />
-      )}
-
-      <motion.div style={isMobile ? {} : { x: springX, y: springY }}>
-        <Link
-          href={href}
-          ref={buttonRef}
-          onMouseMove={handleMouseMove}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={handleMouseLeave}
-          className="relative inline-flex items-center gap-3 px-9 py-4 bg-[#1c1c1e] text-klyth-cream font-sans font-medium text-sm uppercase tracking-[0.14em] rounded-full border border-white/10 hover:bg-[#2c2c2e] hover:border-white/20 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(0,0,0,0.55)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] min-h-[48px] select-none overflow-hidden"
-        >
-          {/* Subtle sweep glare */}
-          <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
-            <span className="absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] transition-transform duration-1000 group-hover:translate-x-[260%]" />
-          </span>
-          <span className="relative z-10">{children}</span>
-          <i className="fa-solid fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1.5 relative z-10" />
-        </Link>
+    <Link href={href}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay, duration: 0.8, type: "spring", stiffness: 100 }}
+        whileHover={{ y: -5, scale: 1.02 }}
+        className="group relative flex flex-col items-start justify-between p-5 md:p-6 bg-white/[0.03] backdrop-blur-md rounded-2xl border border-white/[0.08] hover:border-white/20 transition-all duration-300 w-full aspect-[2/1] sm:aspect-auto sm:h-36 overflow-hidden shadow-[0_0_0_rgba(0,0,0,0)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.3)]"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        <span className="font-sans text-[10px] md:text-xs uppercase tracking-widest text-klyth-cream/50 group-hover:text-klyth-gold transition-colors duration-300 z-10">
+          {title}
+        </span>
+        <div className="flex items-center justify-between w-full mt-2 z-10">
+          <span className="font-serif text-lg md:text-xl text-klyth-cream">{subtitle}</span>
+          <i className="fa-solid fa-arrow-right text-xs md:text-sm text-klyth-cream/50 group-hover:text-klyth-cream group-hover:-rotate-45 transition-all duration-300" />
+        </div>
       </motion.div>
-    </div>
+    </Link>
   );
 };
 
 export default function HomeHero() {
-  const headlineParts = [
-    { text: "Financial", color: "text-klyth-cream font-serif font-light tracking-tight" },
-    { text: "Growth,", color: "text-transparent bg-clip-text bg-gradient-to-br from-klyth-olive to-[#8a9f60] font-serif font-bold" },
-    { text: "Rewired.", color: "text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-[#f9e9c9] font-serif font-bold italic pr-2" },
-  ];
-
-  const [isHoveringSection, setIsHoveringSection] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { damping: 50, stiffness: 200 });
-  const springY = useSpring(mouseY, { damping: 50, stiffness: 200 });
 
-  const handleMouseMoveSection = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left - 250);
-    mouseY.set(e.clientY - rect.top - 250);
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.15,
-      },
-    },
-  } as const;
-
-  const wordVariants = {
-    hidden: { y: "100%" },
-    visible: {
-      y: 0,
-      transition: {
-        duration: 1.1,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  } as const;
-
-  const fadeUpVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1.1,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  } as const;
-
-  const lineVariants = {
-    hidden: { scaleX: 0 },
-    visible: {
-      scaleX: 1,
-      transition: {
-        duration: 1.5,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  } as const;
+  const headlineParts = [
+    { text: "Financial Growth", color: "text-klyth-cream font-serif font-medium tracking-tight" },
+    { text: "Rewired.", color: "text-transparent bg-clip-text bg-gradient-to-br from-klyth-gold to-[#f9e9c9] font-serif font-bold italic pr-2" },
+  ];
 
   return (
-    <section
-      onMouseMove={handleMouseMoveSection}
-      onMouseEnter={() => setIsHoveringSection(true)}
-      onMouseLeave={() => setIsHoveringSection(false)}
-      className="relative w-full min-h-screen flex flex-col justify-between bg-[#090909] text-klyth-cream overflow-hidden px-6 md:px-8 py-16 sm:py-24 select-none"
-    >
+    <section className="relative w-full h-[100vh] flex flex-col justify-center items-center bg-[#0a0a0a] text-klyth-cream overflow-hidden px-6 pt-32 pb-12 select-none">
+      
       {/* Editorial Cinematic Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 15% 15%, rgba(255,255,255,0.015) 0%, transparent 60%)" }} />
+        
+        {/* Living Interactive Grid replacing static grid and spotlight */}
+        <LivingGrid />
 
-        {/* Ambient glows using premium HSL values - Rendered client-side to prevent hydration flicker */}
-        {mounted && (
-          <>
-            <motion.div
-              animate={{
-                opacity: [0.04, 0.055, 0.045, 0.04],
-              }}
-              transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-[30%] -left-[10%] w-[120vw] h-[120vw] rounded-full bg-klyth-olive blur-[240px]"
-            />
 
-            <motion.div
-              animate={{
-                opacity: [0.015, 0.025, 0.018, 0.015],
-              }}
-              transition={{ duration: 48, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-[20%] right-[-10%] w-[100vw] h-[100vw] rounded-full bg-klyth-gold blur-[260px]"
-            />
-          </>
-        )}
 
-        {/* Desktop Cursor spotlight */}
-        <motion.div
-          className="absolute top-0 left-0 rounded-full pointer-events-none bg-white blur-[180px]"
-          style={{
-            width: 450,
-            height: 450,
-            x: springX,
-            y: springY,
-          }}
-          animate={{
-            opacity: isHoveringSection ? 0.035 : 0,
-          }}
-          transition={{ opacity: { duration: 0.5 } }}
-        />
 
-        {/* Subtle grid accent */}
+
+        {/* Noise Texture */}
         <div 
-          className="absolute inset-0 opacity-[0.015]"
-          style={{
-            backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-          }}
+          className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"
+          style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }}
         />
       </div>
 
-      {/* Top spacing helper (aligned with navbar spacing) */}
-      <div className="h-16" />
-
-      {/* Main asymmetric editorial container */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-8 items-start my-auto pb-12 lg:pb-16"
-      >
-
-        {/* Right column: Headline, Divider, and details */}
-        <div className="flex-grow flex flex-col w-full">
-          {/* Large Headline */}
-          <h1 
-            className="text-[11vw] sm:text-[9vw] lg:text-[7.5vw] tracking-tight leading-[0.92] select-text relative z-10"
-            style={{ textShadow: "0 0 40px rgba(255,248,235,0.02)" }}
-          >
-            {headlineParts.map((part, idx) => (
-              <span
-                key={idx}
-                className="inline-block overflow-hidden pb-2 mr-[0.2em] last:mr-0"
-              >
-                <motion.span variants={wordVariants} className={`inline-block ${part.color}`}>
-                  {part.text}
-                </motion.span>
-              </span>
-            ))}
-          </h1>
-
-          {/* Thin Editorial Separator */}
-          <motion.div 
-            variants={lineVariants}
-            style={{ originX: 0 }}
-            className="w-full h-[1px] bg-gradient-to-r from-klyth-gold/30 via-klyth-ghost/20 to-transparent my-10 sm:my-12"
-          />
-
-          {/* Details & CTA (Split Layout) */}
-          <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start justify-between">
-            {/* Description */}
-            <motion.p
-              variants={fadeUpVariants}
-              className="font-sans font-normal text-base sm:text-lg text-klyth-cream/70 max-w-xl leading-relaxed tracking-wide select-text"
-            >
-              Empowering a generation to grow financially with confidence. No boring
-              lectures, no financial anxiety just intuitive systems, daily habits,
-              and a community that moves forward together.
-            </motion.p>
-
-            {/* CTA */}
-            <motion.div variants={fadeUpVariants} className="shrink-0 md:pt-1">
-              <MagneticButton href="/join">Inside the Ecosystem</MagneticButton>
-            </motion.div>
+      {/* Main Centered Content */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center justify-center flex-grow gap-10 md:gap-14 mt-4 sm:mt-8 pointer-events-none">
+        
+        {/* Oversized Logo Centerpiece */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full max-w-[140px] sm:max-w-[200px] md:max-w-[260px]"
+        >
+          <div className="relative aspect-[10526/5000] w-full drop-shadow-2xl">
+            <Image 
+              src="/img/Primary Logo.svg"
+              alt="Klyth Master Logo"
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Bottom bar — minimal scroll indicator */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-center pt-6">
-        <ScrollIndicator align="center" delay={1.4} />
+        {/* Main Headline */}
+        <h1 className="text-center text-[7vw] sm:text-[5vw] lg:text-[4vw] leading-[1.1] tracking-tight">
+          {headlineParts.map((part, idx) => (
+            <motion.span
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 + idx * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className={`inline-block mr-[0.25em] last:mr-0 ${part.color}`}
+            >
+              {part.text}
+            </motion.span>
+          ))}
+        </h1>
+
+        {/* Supporting Statement */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center font-sans font-light text-base md:text-lg lg:text-xl text-klyth-cream/60 max-w-2xl px-4 leading-relaxed"
+        >
+        Empowering a generation to grow financially with confidence. No boring lectures, no financial anxiety just intuitive systems, daily habits, and a community that moves forward together.</motion.p>
+
+        {/* Dual CTA Buttons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 1 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto px-6 sm:px-0 pointer-events-auto"
+        >
+          {/* Primary Gold Button */}
+          <Link 
+            href="/join" 
+            className="group relative flex items-center justify-center gap-3 px-8 py-4 md:px-10 md:py-4 bg-klyth-gold text-[#090909] font-sans font-semibold text-sm uppercase tracking-widest rounded-full hover:scale-105 hover:shadow-[0_0_40px_rgba(207,175,99,0.4)] transition-all duration-300 w-full sm:w-auto overflow-hidden"
+          >
+            <span className="relative z-10">Start Growing</span>
+            <i className="fa-solid fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1 relative z-10" />
+            <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
+              <span className="absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg] transition-transform duration-1000 group-hover:translate-x-[260%]" />
+            </span>
+          </Link>
+
+          {/* Secondary Glass Button */}
+          <Link 
+            href="/ecosystem" 
+            className="group flex items-center justify-center gap-3 px-8 py-4 md:px-10 md:py-4 bg-white/[0.03] backdrop-blur-md text-klyth-cream font-sans font-medium text-sm uppercase tracking-widest rounded-full border border-white/10 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 w-full sm:w-auto"
+          >
+            <span>Inside the Ecosystem</span>
+          </Link>
+        </motion.div>
+
       </div>
+      <div className="relative z-10 w-full mt-8 sm:mt-12 flex justify-center pb-4">
+        <ScrollIndicator align="center" delay={1.5} />
+      </div>
+
     </section>
   );
 }
