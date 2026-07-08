@@ -138,7 +138,7 @@ export default function AboutOrigin() {
       </div>
 
       {/* Scattered Polaroids - Full Width */}
-      <div className="relative w-full h-[65vw] sm:h-[80vh] min-h-[280px] sm:min-h-[500px] flex items-center justify-center mb-12 sm:mb-0">
+      <div className="relative w-full h-[65vw] sm:h-[80vh] min-h-[280px] sm:min-h-[500px] flex items-center justify-center mb-12 sm:mb-0 mt-8 md:mt-24 lg:mt-32">
         {journeyData.map((slide, i) => {
           let distance = i - currentIndex;
           if (distance > journeyData.length / 2) distance -= journeyData.length;
@@ -163,7 +163,7 @@ export default function AboutOrigin() {
           const yPos = isActive ? 0 : (isMobile ? 0 : slot.y);
           const rotation = isActive ? 0 : (isMobile ? 0 : slot.rotate);
           const scale = isActive ? 1 : (isMobile ? 0.8 : 0.55); // Inactive polaroids relative scale
-          const zIndex = isActive ? 40 : 20 - Math.abs(distance);
+          const zIndex = isActive ? 999 : 20 - Math.abs(distance);
           const opacity = isMobile ? (isActive ? 1 : 0) : 1;
 
           return (

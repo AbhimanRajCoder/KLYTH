@@ -55,7 +55,7 @@ export default function Navbar() {
           {/* Left: Brand Logo & Name */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <Image
-              src="/img/Logo.png"
+              src="/img/Primary Logo.svg"
               alt="Klyth Logo"
               width={140}
               height={40}
@@ -125,7 +125,7 @@ export default function Navbar() {
                 className="flex items-center gap-2.5"
               >
                 <Image
-                  src="/img/Logo.png"
+                  src="/img/Primary Logo.svg"
                   alt="Klyth Logo"
                   width={140}
                   height={40}
