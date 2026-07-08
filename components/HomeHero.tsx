@@ -156,7 +156,7 @@ export default function HomeHero() {
       onMouseMove={handleMouseMoveSection}
       onMouseEnter={() => setIsHoveringSection(true)}
       onMouseLeave={() => setIsHoveringSection(false)}
-      className="relative w-full min-h-screen flex flex-col justify-between bg-[#090909] text-klyth-cream overflow-hidden px-6 sm:px-12 lg:px-20 py-16 sm:py-24 select-none"
+      className="relative w-full min-h-screen flex flex-col justify-between bg-[#090909] text-klyth-cream overflow-hidden px-6 md:px-8 py-16 sm:py-24 select-none"
     >
       {/* Editorial Cinematic Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -216,10 +216,8 @@ export default function HomeHero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 w-full flex flex-col lg:flex-row gap-12 lg:gap-8 items-start my-auto pb-12 lg:pb-16"
+        className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-8 items-start my-auto pb-12 lg:pb-16"
       >
-        {/* Left column: empty spacer to preserve asymmetric offset */}
-        <div className="hidden lg:block lg:w-16 shrink-0" />
 
         {/* Right column: Headline, Divider, and details */}
         <div className="flex-grow flex flex-col w-full">
@@ -272,7 +270,7 @@ export default function HomeHero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 1 }}
-        className="relative z-10 w-full flex items-center justify-start border-t border-klyth-ghost/15 pt-6 font-sans text-[10px] tracking-[0.25em] text-klyth-cream/35 uppercase"
+        className="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-start border-t border-klyth-ghost/15 pt-6 font-sans text-[10px] tracking-[0.25em] text-klyth-cream/35 uppercase"
       >
         <span className="hover:text-klyth-gold transition-colors duration-300">Scroll to explore</span>
       </motion.div>

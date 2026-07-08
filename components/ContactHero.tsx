@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function ContactHero() {
   return (
-    <section className="relative w-full h-[35vh] min-h-[300px] flex flex-col justify-center items-center text-center px-6 z-10 pt-20">
+    <section className="relative w-full flex flex-col justify-center items-center text-center px-6 z-10 pt-28 pb-16 md:pt-36 md:pb-20">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -14,7 +14,7 @@ export default function ContactHero() {
           Let’s Talk.
         </h1>
         <p className="font-sans text-lg md:text-xl text-klyth-cream/70 max-w-[60ch] leading-relaxed font-light">
-          Whether you have a question about the ecosystem, want to partner with us, or just want to say hi—we are here for it. Drop us a line below or reach out directly to the right inbox.
+          Whether you have a question about the ecosystem, want to partner with us, or just want to say hi we are here for it. Drop us a line below or reach out directly to the right inbox.
         </p>
       </motion.div>
     </section>
