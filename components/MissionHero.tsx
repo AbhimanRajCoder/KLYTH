@@ -80,9 +80,9 @@ export default function MissionHero() {
             {words.map((word, idx) => {
               const isHighlight = word.toLowerCase().includes("money");
               return (
-                <div key={idx} className="py-1 inline-block">
+                <div key={idx} className="py-0.5 inline-block">
                   <motion.span
-                    className={`inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-semibold tracking-tight leading-tight ${
+                    className={`inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-semibold tracking-tight leading-[1.05] ${
                       isHighlight
                         ? "text-transparent bg-clip-text bg-gradient-to-r from-klyth-gold to-klyth-cream font-bold italic"
                         : "text-klyth-cream"
@@ -103,7 +103,7 @@ export default function MissionHero() {
           </motion.div>
 
           <motion.p
-            className="mt-8 text-base sm:text-lg text-klyth-cream/65 font-sans max-w-3xl leading-relaxed font-light text-center px-4"
+            className="mt-10 text-base sm:text-lg text-klyth-cream/65 font-sans max-w-3xl leading-relaxed font-light text-center px-4"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -112,7 +112,7 @@ export default function MissionHero() {
           </motion.p>
         </div>
 
-        <div className="w-full flex justify-center mt-10 md:mt-16">
+        <div className="w-full flex justify-center mt-16 md:mt-24">
           <ScrollIndicator align="center" delay={1.2} />
         </div>
       </div>
